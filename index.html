@@ -285,4 +285,16 @@ function closeModal() {
 closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
 </script>
 </body>
+    <style>
+@keyframes mainSquarePulse {
+    0%, 100% { 
+        border-color: rgba(0, 240, 255, 0.35); 
+        box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.05); 
+    }
+    50% { 
+        border-color: rgba(255, 255, 255, 0.9); 
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), inset 0 0 12px rgba(0, 240, 255, 0.3); 
+    }
+}
+</style>
 </html>
