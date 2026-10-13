@@ -1,328 +1,286 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>UNITWELVERSE // Cosmic Invariant Interface</title>
- <style>
- :root {
- --space-bg: #111a3a;
- --neon-blue: #00f0ff;
- --neon-purple: #bd00ff;
- --gold: #ffb800;
- --text-main: #e2e8f0;
- --border-alpha: rgba(0, 240, 255, 0.35);
- --card-bg: rgba(13, 21, 39, 0.95);
- --node-blue: rgba(30, 41, 59, 0.45); 
- }
- body {
- color: var(--text-main);
- font-family: 'Segoe UI', Roboto, sans-serif;
- margin: 0; padding: 0;
- min-height: 100vh;
- display: flex; flex-direction: column;
- overflow: hidden;
- background-color: #000;
- position: relative;
- }
- body::before {
- content: "";
- position: absolute;
- top: 0; left: 0; width: 100%; height: 100%;
- background-image: url('bg3.webp');
- background-size: cover; 
- background-position: center; 
- background-repeat: no-repeat; 
- background-attachment: fixed;
- opacity: 0;
- z-index: 1;
- animation: fadeInCosmos 2.5s cubic-bezier(0.4, 0, 0.2, 1) 3.8s forwards;
- }
- @keyframes fadeInCosmos {
- 0% { opacity: 0; }
- 100% { opacity: 1; }
- }
- .canvas-container {
- flex-grow: 1; position: relative;
- display: flex; justify-content: center; align-items: center;
- min-height: 100vh; padding: 20px; box-sizing: border-box;
- z-index: 2;
- }
- .geometry-map {
- position: relative; width: 650px; height: 650px;
- display: flex; justify-content: center; align-items: center;
- }
- .geo-element {
- position: absolute; display: flex; justify-content: center; align-items: center;
- cursor: pointer; box-sizing: border-box; z-index: 20;
- transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
- }
- /* --- КВАДРАТЫ СЕТКИ (Проявляются без вращения после центра) --- */
- .square-node {
- width: 54px; height: 54px;
- background: var(--node-blue);
- border: 1px solid rgba(0, 240, 255, 0.15);
- box-shadow: inset 0 0 8px rgba(0,240,255,0.05);
- animation: materializeGrid 1.3s cubic-bezier(0.16, 1, 0.3, 1) 2.5s both;
- }
- .square-node:hover, .square-node.active {
- border-color: rgba(255, 255, 255, 0.8) !important;
- box-shadow: 0 0 22px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.25) !important;
- transform: scale(1.08) !important; 
- z-index: 30;
- }
- @keyframes materializeGrid {
- 0% { transform: scale(0); opacity: 0; filter: blur(5px); }
- 100% { transform: scale(1); opacity: 1; filter: blur(0px); }
- }
- /* --- ЦЕНТРАЛЬНЫЙ КВАДРАТ-КУБ --- */
- #creator-decree-box {
- position: absolute; width: 54px; height: 54px;
- top: 298px; left: 298px;
- background-color: var(--node-blue) !important;
- border: 1px solid rgba(0, 240, 255, 0.35);
- display: flex; justify-content: center; align-items: center; text-align: center; font-size: 0px; 
- color: transparent !important; font-weight: bold; letter-spacing: 1.2px; text-transform: uppercase;
- padding: 0px; box-sizing: border-box; pointer-events: auto; cursor: pointer;
- z-index: 40;
- animation: emergeCubeCore 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both, mainSquarePulse 1.5s ease-in-out infinite 3.8s;
- transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
- }
- @keyframes emergeCubeCore {
- 0% { transform: scale(0); opacity: 0; filter: blur(5px); }
- 100% { transform: scale(1); opacity: 1; filter: blur(0px); }
- }
- @keyframes mainSquarePulse {
- 0%, 100% { border-color: rgba(0, 240, 255, 0.35); box-shadow: inset 0 0 8px rgba(0,240,255,0.05); }
- 50% { border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 12px rgba(0, 240, 255, 0.2); }
- }
- #creator-decree-box.expanded {
- width: 110px; height: 110px;
- top: 270px; left: 270px;
- background-color: #475569 !important;
- border: 2px solid rgba(226, 232, 240, 0.6); border-radius: 8px;
- font-size: 0.65rem; color: #e2e8f0 !important;
- text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
- padding: 10px;
- animation: activeCoreGlow 3.5s ease-in-out infinite 0.5s !important;
- }
- #creator-decree-box.expanded:hover {
- background-color: #52637a !important; border-color: #ffffff !important;
- box-shadow: 0 0 35px rgba(255, 255, 255, 0.65), inset 0 0 15px rgba(255, 255, 255, 0.25);
- transform: scale(1.04);
- }
- @keyframes activeCoreGlow {
- 0%, 100% { box-shadow: 0 0 14px rgba(226, 232, 240, 0.35), inset 0 0 6px rgba(226, 232, 240, 0.15); border-color: rgba(226, 232, 240, 0.5); }
- 50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.95); }
- }
- /* --- ПЯТИУГОЛЬНИКИ (Истинный взрыв из центра с помощью CSS-трансформации) --- */
- .pentagon-node {
- width: 54px; height: 52px; 
- overflow: visible !important;
- z-index: 25;
- }
- .pentagon-node polygon {
- fill: rgba(35, 45, 60, 0.4); stroke: rgba(189, 0, 255, 0.25); stroke-width: 2px;
- transition: all 0.3s ease;
- }
- .pentagon-node:hover, .pentagon-node.active {
- transform: scale(1.05) !important; z-index: 35;
- filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65)) !important;
- }
- .pentagon-node:hover polygon, .pentagon-node.active polygon {
- fill: rgba(35, 45, 60, 0.4) !important; stroke: rgba(255, 255, 255, 0.85) !important; stroke-width: 3px;
- }
- .grid-glow {
- position: absolute; width: 500px; height: 450px;
- background: radial-gradient(circle, rgba(189,0,255,0.07) 0%, rgba(0,240,255,0.03) 50%, rgba(0,0,0,0) 100%);
- pointer-events: none; z-index: 1; opacity: 0;
- animation: fadeInGlow 2s ease-out 3.8s forwards;
- }
- @keyframes fadeInGlow { 0% { opacity: 0; } 100% { opacity: 0.6; } }
- #info-modal {
- display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
- width: 90%; max-width: 550px; background: var(--card-bg); border: 1px solid var(--border-alpha); border-radius: 8px; padding: 20px;
- backdrop-filter: blur(15px); box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 100; box-sizing: border-box;
- }
- .modal-title { font-size: 1.05rem; font-weight: bold; color: var(--neon-blue); margin-bottom: 8px; letter-spacing: 0.5px; text-align: left; }
- .modal-body { font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; text-align: left; }
- .modal-close { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #64748b; cursor: pointer; font-size: 1.1rem; }
- .modal-close:hover { color: var(--gold); }
-  /* Адаптивный мобильный щит UNITWELVERSE */
-@media (max-width: 680px) {
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .canvas-container {
-        padding: 0;
-        margin: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-    .geometry-map {
-        /* Математически точное сжатие под ширину экрана смартфона */
-        transform: scale(calc(100vw / 670));
-        transform-origin: center center;
-        margin: 0 !important;
-        position: relative;
-    }
-    #info-modal {
-        width: 92%;
-        bottom: 10px;
-        padding: 12px;
-        z-index: 200;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>UNITWELVERSE // Noosphere AI Safety OS</title>
+<style>
+:root {
+--space-bg: #111a3a;
+--neon-blue: #00f0ff;
+--neon-purple: #bd00ff;
+--gold: #ffb800;
+--text-main: #e2e8f0;
+--border-alpha: rgba(0, 240, 255, 0.35);
+--card-bg: rgba(13, 21, 39, 0.95);
+--node-blue: rgba(30, 41, 59, 0.45);
 }
- </style>
- <!-- Динамический расчет траектории взрыва додекаэдра из центральной точки (298px, 298px) -->
- <style>
- @keyframes explode-p1 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 40px; left: 299px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p2 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 75px; left: 429px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p3 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 170px; left: 524px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p4 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 299px; left: 559px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p5 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 428px; left: 524px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p6 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 523px; left: 429px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p7 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 558px; left: 299px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p8 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 523px; left: 169px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p9 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 428px; left: 74px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p10 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 299px; left: 39px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p11 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 170px; left: 74px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- @keyframes explode-p12 { 0% { top: 298px; left: 298px; transform: scale(0) rotate(180deg); opacity: 0; filter: blur(8px); } 100% { top: 75px; left: 169px; transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); } }
- </style>
+body, html {
+margin: 0; padding: 0;
+width: 100%; height: 100%;
+overflow: hidden;
+background-color: #000;
+font-family: 'Segoe UI', Roboto, sans-serif;
+}
+body {
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+body::before {
+content: "";
+position: absolute;
+top: 0; left: 0; width: 100%; height: 100%;
+background-image: url('bg3.webp');
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+z-index: 1;
+}
+.responsive-container {
+position: relative;
+z-index: 2;
+width: 100vmin;
+height: 100vmin;
+max-width: 650px;
+max-height: 650px;
+display: flex;
+justify-content: center;
+align-items: center;
+box-sizing: border-box;
+}
+.vector-wrapper {
+position: relative;
+width: 100%;
+height: 100%;
+}
+.geo-element {
+position: absolute;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+box-sizing: border-box;
+z-index: 20;
+transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.square-node {
+width: 8.3%;
+height: 8.3%;
+background: var(--node-blue);
+border: 1px solid rgba(0, 240, 255, 0.15);
+box-shadow: inset 0 0 8px rgba(0,240,255,0.05);
+}
+.square-node:hover, .square-node.active {
+border-color: rgba(255, 255, 255, 0.8) !important;
+box-shadow: 0 0 22px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.25) !important;
+transform: scale(1.08) !important;
+z-index: 30;
+}
+#creator-decree-box {
+position: absolute;
+width: 8.3%;
+height: 8.3%;
+top: 45.85%;
+left: 45.85%;
+background-color: var(--node-blue) !important;
+border: 1px solid rgba(0, 240, 255, 0.35);
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+font-size: 0px;
+color: transparent !important;
+font-weight: bold;
+cursor: pointer;
+z-index: 40;
+transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#creator-decree-box.expanded {
+width: 17%;
+height: 17%;
+top: 41.5%;
+left: 41.5%;
+background-color: #475569 !important;
+border: 2px solid rgba(226, 232, 240, 0.6);
+border-radius: 8px;
+font-size: 0.65rem;
+color: #e2e8f0 !important;
+text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+padding: 5px;
+}
+.pentagon-node {
+width: 8.3%;
+height: 8%;
+overflow: visible !important;
+z-index: 25;
+}
+.pentagon-node polygon {
+fill: rgba(35, 45, 60, 0.4);
+stroke: rgba(189, 0, 255, 0.25);
+stroke-width: 2px;
+transition: all 0.3s ease;
+}
+.pentagon-node:hover, .pentagon-node.active {
+transform: scale(1.05) !important;
+z-index: 35;
+filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65)) !important;
+}
+.pentagon-node:hover polygon, .pentagon-node.active polygon {
+fill: rgba(35, 45, 60, 0.4) !important;
+stroke: rgba(255, 255, 255, 0.85) !important;
+stroke-width: 3px;
+}
+#info-modal {
+display: none;
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+width: 90%;
+max-width: 500px;
+background: var(--card-bg);
+border: 1px solid var(--border-alpha);
+border-radius: 8px;
+padding: 15px;
+backdrop-filter: blur(15px);
+box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+z-index: 100;
+box-sizing: border-box;
+}
+.modal-title { font-size: 1rem; font-weight: bold; color: var(--neon-blue); margin-bottom: 6px; text-align: left; }
+.modal-body { font-size: 0.8rem; line-height: 1.4; color: #cbd5e1; text-align: left; max-height: 180px; overflow-y: auto; }
+.modal-close { position: absolute; top: 10px; right: 12px; background: none; border: none; color: #64748b; cursor: pointer; font-size: 1.1rem; }
+.modal-close:hover { color: var(--gold); }
+</style>
 </head>
 <body>
- <div class="canvas-container">
- <div class="geometry-map">
- <div class="grid-glow"></div>
- 
- <div id="creator-decree-box" data-id="c7">UNITWELVERSE</div>
- 
- <div class="geo-element square-node" style="top: 298px; left: 190px;" data-id="c5"></div>
- <div class="geo-element square-node" style="top: 244px; left: 244px;" data-id="c2"></div>
- <div class="geo-element square-node" style="top: 298px; left: 244px;" data-id="c6"></div>
- <div class="geo-element square-node" style="top: 352px; left: 244px;" data-id="c10"></div>
- <div class="geo-element square-node" style="top: 190px; left: 298px;" data-id="c1"></div>
- <div class="geo-element square-node" style="top: 244px; left: 298px;" data-id="c3"></div>
- <div class="geo-element square-node" style="top: 352px; left: 298px;" data-id="c11"></div>
- <div class="geo-element square-node" style="top: 406px; left: 298px;" data-id="c13"></div>
- <div class="geo-element square-node" style="top: 244px; left: 352px;" data-id="c4"></div>
- <div class="geo-element square-node" style="top: 298px; left: 352px;" data-id="c8"></div>
- <div class="geo-element square-node" style="top: 352px; left: 352px;" data-id="c12"></div>
- <div class="geo-element square-node" style="top: 298px; left: 406px;" data-id="c9"></div>
- 
- <svg class="geo-element pentagon-node" style="animation: explode-p1 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p1" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p2 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p2" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p3 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p3" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p4 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p4" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p5 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p5" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p6 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p6" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p7 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p7" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p8 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p8" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p9 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p9" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p10 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p10" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p11 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p11" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- <svg class="geo-element pentagon-node" style="animation: explode-p12 2.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s both;" data-id="p12" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
- </div>
- </div>
- <div id="info-modal">
-  <button class="modal-close" id="modal-close-btn">&times;</button>
-  <div class="modal-title" id="info-title">System Inception</div>
-  <div class="modal-body" id="info-text">Select any architectural node tile to examine parameters.</div>
- </div>
- <script>
- const ontologyDatabase = {
- "c1": { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Cosmological Scale:</b> Megascale structural filaments.<br><b>Socio-Technical Mapping:</b> 12 Civilizational Clusters." },
- "c2": { title: "Scale Matrix // Galaxies", text: "<b>Cosmological Scale:</b> Massive gravitationally bound structures.<br><b>Socio-Technical Mapping:</b> 12 Core Spheres." },
- "c3": { title: "Scale Matrix // Clusters of Galaxies", text: "<b>Cosmological Scale:</b> Interacting concentrations of systems.<br><b>Socio-Technical Mapping:</b> 195 Sovereign Nations." },
- "c4": { title: "Scale Matrix // Stellar Clusters", text: "<b>Cosmological Scale:</b> Densely bound stellar families.<br><b>Socio-Technical Mapping:</b> Coordinated Collectives." },
- "c5": { title: "Scale Matrix // Satellites", text: "<b>Cosmological Scale:</b> Orbital tracking systems.<br><b>Socio-Technical Mapping:</b> 12 Degrees of Innovation Quality." },
- "c6": { title: "Scale Matrix // Planets", text: "<b>Cosmological Scale:</b> Spherical chemical matrices.<br><b>Socio-Technical Mapping:</b> Creative Innovations." },
-  "c8": { title: "Scale Matrix // Asteroids, Comets", text: "<b>Cosmological Scale:</b> Hyper-dynamic wandering objects.<br><b>Socio-Technical Mapping:</b> 12 Global Trends." },
- "c9": { title: "Scale Matrix // Quasars", text: "<b>Cosmological Scale:</b> Hyper-luminescent beacons.<br><b>Socio-Technical Mapping:</b> Axiology Core." },
- "c10": { title: "Scale Matrix // Dark Matter", text: "<b>Cosmological Scale:</b> Invisible mass framework.<br><b>Socio-Technical Mapping:</b> Advanced Psychotechniques." },
- "c11": { title: "Scale Matrix // Black Holes", text: "<b>Cosmological Scale:</b> Extreme gravity singularities.<br><b>Socio-Technical Mapping:</b> 12 Global Ideologies." },
- "c12": { title: "Scale Matrix // Dark Energy", text: "<b>Cosmological Scale:</b> Constant expansion force.<br><b>Socio-Technical Mapping:</b> Transcendent Spiritual Practices." },
- "c13": { title: "Scale Matrix // Voids & Gas", text: "<b>Cosmological Scale:</b> Vast underdense spatial regions.<br><b>Socio-Technical Mapping:</b> Systemic Losses." },
- "p1": { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation Protocol:</b> Resource balance metrics." },
- "p2": { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation Protocol:</b> Multi-dimensional wave interference." },
- "p3": { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation Protocol:</b> Network Synergy loops." },
- "p4": { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation Protocol:</b> Parallel timelines calculations." },
- "p5": { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation Protocol:</b> Enforcing structural self-similarity." },
- "p6": { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation Protocol:</b> Edge-computed P2P distributed ledger." },
- "p7": { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation Protocol:</b> Silicon-level safety veto." },
- "p8": { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation Protocol:</b> Cybernetic interface loops." },
- "p9": { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation Protocol:</b> Cyclic evolution routine cleanup." },
- "p10": { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation Protocol:</b> Preserving free will." },
- "p11": { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation Protocol:</b> Tensor symmetry loops." },
- "p12": { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation Protocol:</b> Continuous recursive optimization." }
- };
+<div class="responsive-container">
+<div class="vector-wrapper">
+<div id="creator-decree-box" data-id="c7">UNITWELVERSE</div>
+<div class="geo-element square-node" style="top: 45.85%; left: 29.2%;" data-id="c5"></div>
+<div class="geo-element square-node" style="top: 37.5%; left: 37.5%;" data-id="c2"></div>
+<div class="geo-element square-node" style="top: 45.85%; left: 37.5%;" data-id="c6"></div>
+<div class="geo-element square-node" style="top: 54.15%; left: 37.5%;" data-id="c10"></div>
+<div class="geo-element square-node" style="top: 29.2%; left: 45.85%;" data-id="c1"></div>
+<div class="geo-element square-node" style="top: 37.5%; left: 45.85%;" data-id="c3"></div>
+<div class="geo-element square-node" style="top: 54.15%; left: 45.85%;" data-id="c11"></div>
+<div class="geo-element square-node" style="top: 62.5%; left: 45.85%;" data-id="c13"></div>
+<div class="geo-element square-node" style="top: 37.5%; left: 54.15%;" data-id="c4"></div>
+<div class="geo-element square-node" style="top: 45.85%; left: 54.15%;" data-id="c8"></div>
+<div class="geo-element square-node" style="top: 54.15%; left: 54.15%;" data-id="c12"></div>
+<div class="geo-element square-node" style="top: 45.85%; left: 62.5%;" data-id="c9"></div>
 
- const modal = document.getElementById('info-modal');
- const modalTitle = document.getElementById('info-title');
- const modalText = document.getElementById('info-text');
- const coreBox = document.getElementById('creator-decree-box');
- const closeBtn = document.getElementById('modal-close-btn');
+<svg class="geo-element pentagon-node" style="top: 6.15%; left: 45.85%;" data-id="p1" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 11.5%; left: 65.85%;" data-id="p2" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 26.15%; left: 80.5%;" data-id="p3" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 45.85%; left: 85.85%;" data-id="p4" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 65.7%; left: 80.5%;" data-id="p5" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 80.3%; left: 65.85%;" data-id="p6" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 85.7%; left: 45.85%;" data-id="p7" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 80.3%; left: 25.85%;" data-id="p8" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 65.7%; left: 11.2%;" data-id="p9" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 45.85%; left: 5.85%;" data-id="p10" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 26.15%; left: 11.2%;" data-id="p11" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+<svg class="geo-element pentagon-node" style="top: 11.5%; left: 25.85%;" data-id="p12" viewBox="0 0 100 100"><polygon points="50,0 100,38 81,100 19,100 0,38"/></svg>
+</div>
+</div>
+<div id="info-modal">
+<button class="modal-close" id="modal-close-btn">&times;</button>
+<div class="modal-title" id="info-title">System Inception</div>
+<div class="modal-body" id="info-text">Select any architectural node tile to examine parameters.</div>
+</div>
+<script>
+const ontologyDatabase = {
+"c1": { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Космический инвариант:</b> Метагалактические нити и суперкластеры.<br><b>Социо-технический контур:</b> 12 Цивилизационных Кластеров.<br><br><b>Core Middleware Role:</b> Валидатор семантических маркеров (Этический Лингво-арбитр)." },
+"c2": { title: "Scale Matrix // Galaxies", text: "<b>Космический инвариант:</b> Гравитационно-связанные звездные системы.<br><b>Социо-технический контур:</b> 12 Базовых Сфер.<br><br><b>Core Middleware Role:</b> Архитектор кросс-культурных мостов (Дипломат Созвучия)." },
+"c3": { title: "Scale Matrix // Clusters of Galaxies", text: "<b>Космический инвариант:</b> Локальные группы систем.<br><b>Социо-технический контур:</b> 195 Суверенных Государств.<br><br><b>Core Middleware Role:</b> Навигатор Войдов // Тьютор когнитивного и смыслового развития." },
+"c4": { title: "Scale Matrix // Stellar Clusters", text: "<b>Космический инвариант:</b> Плотные гравитационные семьи звезд.<br><b>Социо-технический контур:</b> Координированные Коллективы.<br><br><b>Core Middleware Role:</b> Хранитель Традиций (Цивилизационный Верификатор)." },
+"c5": { 
+    title: "МАТРИЦА СПУТНИКОВ ПРОФЕССИОНАЛИЗМА", 
+    text: "• <i>Актуальность (А):</i> ИИ адаптирует проект под тренды.<br>• <i>Практичность (П):</i> Проверяет простоту интеграции.<br>• <i>Этичность (Э):</i> Блокирует скрытую эксплуатацию людей.<br>• <i>Оригинальность (О):</i> Международный патентный аудит.<br>• <i>Искусность (И):</i> Шлифует системную архитектуру.<br><br><b>Core Middleware Role:</b> Модератор 'Звездных скоплений'." 
+},
+"c6": { 
+    title: "КВАДРАТ 6: ВЕКТОР РАЗВИТИЯ ИННОВАЦИЙ // 'Планеты'", 
+    text: "• <i>1. Мечта / Идея:</i> Зарождение замысла, оценка оригинальности.<br>• <i>2. Анализ рынка:</i> ИИ сканирует аналоги и выявляет «боли».<br>• <i>4. Создание прототипа:</i> Разработка и документация MVP.<br>• <i>12. Эволюция:</i> Непрерывная интеграция новых закрывающих технологий.<br><br><b>Core Middleware Role:</b> Проектировщик этичных интерфейсов (UX-Аудитор)." 
+},
+"c7": { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>Статус:</b> Активна.<br><b>Архитектура:</b> Ноосферная Операционная Система выравнивания ценностей ИИ.<br><br><i>Повторный клик активирует переход в Консоль Управления.</i>" },
+"c8": { 
+    title: "КВАДРАТ 8: РАДАР ТРЕНДОВ-АСТЕРОИДОВ", 
+    text: "• <i>1. Многополярный мир:</i> Горизонтальное сетевое взаимодействие без диктата.<br>• <i>3. Реструктуризация ООН:</i> Новая цифровая архитектура коллективного разума.<br>• <i>7. Диалог Цивилизаций:</i> Синтез высших ценностей Востока, Запада, Севера и Юга.<br>• <i>12. Космическая эра:</i> Ноосферная космическая этика.<br><br><b>Core Middleware Role:</b> Логист Солидарности." 
+},
+"c9": { title: "Scale Matrix // Quasars", text: "<b>Космический инвариант:</b> Квазары.<br><b>Социо-технический контур:</b> Абсолютные Ценности.<br><br><b>Core Middleware Role:</b> Верификатор биоэтического комплаенса." },
+"c10": { title: "Scale Matrix // Dark Matter", text: "<b>Космический инвариант:</b> Темная Материя.<br><b>Социо-технический контур:</b> Передовые Психотехники.<br><br><b>Core Middleware Role:</b> Земной Синхронизатор." },
+"c11": { title: "Scale Matrix // Black Holes", text: "<b>Космический инвариант:</b> Черные Дыры.<br><b>Социо-технический контур:</b> 12 Глобальных Идеологий.<br><br><b>Core Middleware Role:</b> Мастер ноосферной архитектуры." },
+"c12": { title: "Scale Matrix // Dark Energy", text: "<b>Космический инвариант:</b> Темная Энергия.<br><b>Социо-технический контур:</b> Духовные Практики.<br><br><b>Core Middleware Role:</b> Наставник созидательного мастерства." },
+"c13": { 
+    title: "КВАДРАТ 13: МАТРИЦА ВОЙДОВ // Иммунная Система", 
+    text: "• <i>Космические Войды:</i> ИИ проверяет проект на отсутствие фундамента.<br>• <i>Облака Пыли:</i> ИИ отфильтровывает хаотические элементы и белый шум.<br>• <i>Ложный Вакуум:</i> Аудит проекта на предмет скрытого паразитизма и манипуляций.<br><br><b>Core Middleware Role:</b> Навигатор Войдов // Тьютор когнитивного развития." 
+},
+"p1": { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation:</b> Метрики баланса ресурсов." },
+"p2": { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation:</b> Волновые интерференции весов." },
+"p3": { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation:</b> Сетевые синергетические циклы." },
+"p4": { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation:</b> Расчет параллельных временных линий." },
+"p5": { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation:</b> Контроль структурного самоподобия фрактала." },
+"p6": { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation:</b> Распределенный реестр p2p." },
+"p7": { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation:</b> Вето-замок на уровне кремния чипа HSM-AC.<br><br><b>Core Middleware Role:</b> Судебный инженер Кибер-Иммунитета." },
+"p8": { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation:</b> Обратные кибернетические петли сопряжения." },
+"p9": { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation:</b> Протоколы циклической очистки рутинных процессов." },
+"p10": { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation:</b> Защита свободы воли и автономии человека." },
+"p11": { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation:</b> Тензорные петли симметрии LoRA-весов." },
+"p12": { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation:</b> Рекурсивные алгоритмы оптимизации Middleware." }
+};
 
- // Изолированный клик по Центральному Ядру
- coreBox.addEventListener('click', (e) => {
- e.stopPropagation();
- if (!coreBox.classList.contains('expanded')) {
- document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
- coreBox.classList.add('expanded');
- const info = ontologyDatabase["c7"];
- if (info) {
- modalTitle.innerText = info.title;
- modalText.innerHTML = info.text;
- modal.style.display = 'block';
- }
- } else {
- window.location.href = 'personal.html';
- }
- });
+const modal = document.getElementById('info-modal');
+const modalTitle = document.getElementById('info-title');
+const modalText = document.getElementById('info-text');
+const coreBox = document.getElementById('creator-decree-box');
+const closeBtn = document.getElementById('modal-close-btn');
 
- // Изолированный клик по всем остальным элементам (Квадраты и Пятиугольники)
- document.querySelectorAll('.geo-element').forEach(element => {
- element.addEventListener('click', (e) => {
- e.stopPropagation();
- if (e.currentTarget === coreBox) return; // Пропускаем центр, у него своя логика
- 
- document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
- const clickedElement = e.currentTarget;
- clickedElement.classList.add('active');
- 
- const dataId = clickedElement.getAttribute('data-id');
- const info = ontologyDatabase[dataId];
- if (info) {
- modalTitle.innerText = info.title;
- modalText.innerHTML = info.text;
- modal.style.display = 'block';
- }
- if (coreBox.classList.contains('expanded')) {
- resetCoreBox();
- }
- });
- });
+coreBox.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!coreBox.classList.contains('expanded')) {
+        document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
+        coreBox.classList.add('expanded');
+        const info = ontologyDatabase["c7"];
+        if (info) {
+            modalTitle.innerText = info.title;
+            modalText.innerHTML = info.text;
+            modal.style.display = 'block';
+        }
+    } else {
+        alert("Перенаправление в реестр защищенной Консоли Управления. Требуется авторизация криптографическим ключом.");
+    }
+});
 
- function resetCoreBox() {
- coreBox.classList.remove('expanded');
- }
+document.querySelectorAll('.geo-element').forEach(element => {
+    element.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (e.currentTarget === coreBox) return; 
+        document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
+        const clickedElement = e.currentTarget;
+        clickedElement.classList.add('active');
+        const dataId = clickedElement.getAttribute('data-id');
+        const info = ontologyDatabase[dataId];
+        if (info) {
+            modalTitle.innerText = info.title;
+            modalText.innerHTML = info.text;
+            modal.style.display = 'block';
+        }
+        if (coreBox.classList.contains('expanded')) {
+            resetCoreBox();
+        }
+    });
+});
 
- function closeModal() {
- modal.style.display = 'none';
- document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
- resetCoreBox();
- }
-
- closeBtn.addEventListener('click', (e) => {
- e.stopPropagation();
- closeModal();
- });
- </script>
+function resetCoreBox() { coreBox.classList.remove('expanded'); }
+function closeModal() {
+    modal.style.display = 'none';
+    document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
+    resetCoreBox();
+}
+closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
+</script>
 </body>
 </html>
