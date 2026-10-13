@@ -361,9 +361,7 @@ function exitToGalaxyMap() {
     document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(16,24,48,0.2) 0%, rgba(0,0,0,0.97) 100%)";
     document.getElementById('interactive-card').style.animation = 'autoNoosphereFlip 6s cubic-bezier(0.4, 0, 0.2, 1) infinite';
 }
-
 document.querySelectorAll('.geo-element').forEach(element => {
-   document.querySelectorAll('.geo-element').forEach(element => {
     element.addEventListener('click', (e) => {
         e.stopPropagation();
         if (e.currentTarget === coreBox) return; 
@@ -379,7 +377,6 @@ document.querySelectorAll('.geo-element').forEach(element => {
         if (coreBox.classList.contains('expanded')) { coreBox.classList.remove('expanded'); }
     });
 });
-
 closeBtn.addEventListener('click', (e) => { e.stopPropagation(); modal.style.display = 'none'; document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active')); coreBox.classList.remove('expanded'); });
 </script>
 
