@@ -363,6 +363,7 @@ function exitToGalaxyMap() {
 }
 
 document.querySelectorAll('.geo-element').forEach(element => {
+   document.querySelectorAll('.geo-element').forEach(element => {
     element.addEventListener('click', (e) => {
         e.stopPropagation();
         if (e.currentTarget === coreBox) return; 
