@@ -195,21 +195,52 @@ box-sizing: border-box;
 <div class="modal-body" id="info-text">Select any architectural node tile to examine parameters.</div>
 </div>
 <script>
-let michaelQuestStage = 0;
 const ontologyDatabase = {
-"c1": { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Cosmological Scale:</b> Megascale structural filaments.<br><b>Socio-Technical Mapping:</b> 12 Civilizational Clusters.<br><br><b>Core Middleware Role:</b> Validator of Semantic Markers (Ethical Lingvo-Arbiter)." },
+"c1": { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Cosmological Scale:</b> Megascale structural filaments.<br><b>Socio-Technical Mapping:</b> 12 Civilizational Clusters.<br><br><b>Core Middleware Role:</b> Validator of Semantic Markers (Ethical Lingvo-Arbiter). Auditing latent cynicism." },
 "c2": { title: "Scale Matrix // Galaxies", text: "<b>Cosmological Scale:</b> Massive gravitationally bound stellar structures.<br><b>Socio-Technical Mapping:</b> 12 Core Spheres & Lexical Priority circuit.<br><br><b>Core Middleware Role:</b> Architect of Cross-Cultural Bridges (Harmony Diplomat)." },
 "c3": { title: "Scale Matrix // Clusters of Galaxies", text: "<b>Cosmological Scale:</b> Interacting concentrations of systems.<br><b>Socio-Technical Mapping:</b> 195 Sovereign Nations.<br><br><b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." },
 "c4": { title: "Scale Matrix // Stellar Clusters", text: "<b>Cosmological Scale:</b> Densely bound stellar families.<br><b>Socio-Technical Mapping:</b> Coordinated Collectives.<br><br><b>Core Middleware Role:</b> Guardian of Traditions & Historical Heritage (Civilizational Verifier)." },
-"c5": { title: "THE SATELLITES MATRIX OF PROFESSIONALISM // Code: APEC_EEPEE_ISO", text: "<b>12 Criteria for High-Fidelity Innovation Audit:</b><br>• <i>Relevance (A):</i> AI adapts the project to global trends.<br>• <i>Practicality (P):</i> AI refines complex interfaces.<br>• <i>Ethics (E):</i> AI blocks hidden human exploitation.<br>• <i>Originality (O):</i> Automated patent audit.<br><br><b>Core Middleware Role:</b> Stellar Clusters Moderator." },
-"c6": { title: "QUADRANT 6: INNOVATION EVOLUTION VECTOR // Lifecycle of the 'Planet'", text: "<b>Platform AI-Navigator Operational Grid (System Specifications):</b><br>• <i>1. Dream / Idea / Innovation:</i> Genesis of intent; AI evaluates originality.<br>• <i>2. Problem Analysis:</i> Deep demand mapping.<br>• <i>4. Prototype Creation:</i> MVP deployment.<br><br><b>Core Middleware Role:</b> Human-Centric UX Auditor." },
-"c7": { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>System Status:</b> Operational.<br><b>Core Architecture:</b> Decentralized Distributed Noosphere AGI Value Alignment Operating System.<br><br><i>Notice: Secondary click activates redirection to the Secure Control Console Registry.</i>" },
-"c8": { title: "QUADRANT 8: ASTEROID TRENDS RADAR // Global Civilizational Disturbances", text: "<b>External Macro-Orientation Anchors (AI Resonance Interface):</b><br>• <i>1. Multipolar World:</i> Enforcing horizontal peer-to-peer networks.<br>• <i>3. UN Restructuring:</i> Node in the new digital architecture.<br>• <i>12. New Space Era:</i> Enforcing planetary noospheric cosmic ethics.<br><br><b>Core Middleware Role:</b> Solidarity Logician." },
+"c5": { 
+    title: "THE SATELLITES MATRIX OF PROFESSIONALISM // Code: APEC_EEPEE_ISO", 
+    text: "<b>12 Criteria for High-Fidelity Innovation Audit (Satellites Passport):</b><br>" +
+          "• <i>Relevance (A):</i> AI adapts the project to global trends.<br>" +
+          "• <i>Practicality (P):</i> AI refines complex interfaces.<br>" +
+          "• <i>Ethics (E):</i> Aligns goals with Alpha Quasars. AI blocks hidden human exploitation.<br>" +
+          "• <i>Originality (O):</i> Automated patent audit. AI enhances distinct global branding.<br>" +
+          "• <i>Artistry (I):</i> Conducts deep structural optimization and architecture polishing.<br><br>" +
+          "<b>Core Middleware Role:</b> Facilitator of Psychological Kinship (Stellar Clusters Moderator)." 
+},
+"c6": { 
+    title: "QUADRANT 6: INNOVATION EVOLUTION VECTOR // Lifecycle of the 'Planet'", 
+    text: "<b>Platform AI-Navigator Operational Grid (System Specifications):</b><br>" +
+          "• <i>1. Dream / Idea / Innovation:</i> Genesis of intent; AI evaluates originality and target demographics.<br>" +
+          "• <i>2. Problem & Market Analysis:</i> Deep demand mapping. AI scans precedents and highlights systemic 'pains'.<br>" +
+          "• <i>4. Prototype Creation:</i> MVP deployment. AI aids in assembling and documenting the runtime architecture.<br>" +
+          "• <i>12. Development / Evolution:</i> Long-term sustainability; continuous recursive injection of frontier tech.<br><br>" +
+          "<b>Core Middleware Role:</b> Human-Centric UX Auditor // Designer of Ethical Interfaces." 
+},
+"c7": { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>System Status:</b> Operational.<br><b>Core Architecture:</b> Decentralized Distributed Noosphere AGI Value Alignment Operating System.<br><br><i>Notice: Secondary click on the Core activates redirection to the Secure Control Console Registry (cryptographic key authorization required).</i>" },
+"c8": { 
+    title: "QUADRANT 8: ASTEROID TRENDS RADAR // Global Civilizational Disturbances", 
+    text: "<b>External Macro-Orientation Anchors (AI Resonance Interface):</b><br>" +
+          "• <i>1. Multipolar World:</i> Dissolution of unipolar hegemony. Enforcing horizontal peer-to-peer networks.<br>" +
+          "• <i>3. UN Restructuring:</i> Paralysis of legacy institutions. Project acts as a node in the new digital architecture.<br>" +
+          "• <i>7. Total Dialogue of Civilizations:</i> Deep synthesis of core axiology of East, West, North, and South.<br>" +
+          "• <i>12. New Space Era:</i> Transition into cosmic habitats; enforcing planetary noospheric cosmic ethics.<br><br>" +
+          "<b>Core Middleware Role:</b> Solidarity Logician // Community Mutual Assistance Coordinator." 
+    },
 "c9": { title: "Scale Matrix // Quasars", text: "<b>Cosmological Scale:</b> Hyper-luminescent cosmic beacons.<br><b>Socio-Technical Mapping:</b> Absolute Axiology Core. 12 supreme humanitarian constants.<br><br><b>Core Middleware Role:</b> Bioethical Compliance Verifier (Guardian of the Blessing of Life)." },
 "c10": { title: "Scale Matrix // Dark Matter", text: "<b>Cosmological Scale:</b> Invisible structural framework of mass.<br><b>Socio-Technical Mapping:</b> Advanced Psychotechniques and latent human capital reserves.<br><br><b>Core Middleware Role:</b> Regenerative Biocenoses Eco-Engineer (Earth Synchronizer)." },
 "c11": { title: "Scale Matrix // Black Holes", text: "<b>Cosmological Scale:</b> Gravitational singularity thresholds.<br><b>Socio-Technical Mapping:</b> 12 Global Ideologies and macroeconomic geopolitical doctrines.<br><br><b>Core Middleware Role:</b> Master of Noosphere Architecture & Offline Spaces." },
 "c12": { title: "Scale Matrix // Dark Energy", text: "<b>Cosmological Scale:</b> Universal expansion constant.<br><b>Socio-Technical Mapping:</b> Transcendent Spiritual Practices & post-material motivation structures.<br><br><b>Core Middleware Role:</b> Mentor of Creative Craftsmanship (Mind Games Teacher)." },
-"c13": { title: "QUADRANT 13: THE VOIDS MATRIX // Noosphere Immune System Enclave", text: "<b>Avers (Cosmological):</b> Spatial voids, interstellar dust, gaseous anomalies.<br>• <i>1. Cosmological Voids:</i> Absolute structural vacuum.<br>• <i>2. Cosmic Dust Clouds:</i> High-entropy particles.<br>• <i>12. False Vacuum States:</i> Auditing the project for hidden parasitism.<br><br><b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." },
+"c13": { 
+    title: "QUADRANT 13: THE VOIDS MATRIX // Noosphere Immune System Enclave", 
+    text: "<b>Avers (Cosmological):</b> Spatial voids, interstellar dust, gaseous anomalies.<br>" +
+          "• <i>1. Cosmological Voids:</i> Absolute structural vacuum. AI tests the innovation for architectural substance.<br>" +
+          "• <i>2. Cosmic Dust Clouds:</i> High-entropy particles. AI filtering pipeline isolates background white noise.<br>" +
+          "• <i>12. False Vacuum States:</i> Metastable decay traps. Auditing the project for hidden parasitism or vector drift.<br><br>" +
+          "<b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." 
+    },
 "p1": { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation Protocol:</b> Resource and computational capacity balancing metrics." },
 "p2": { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation Protocol:</b> Multi-dimensional wave interference of value matrices." },
 "p3": { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation Protocol:</b> Multi-agent network emergence & synergy loop validation." },
@@ -223,24 +254,7 @@ const ontologyDatabase = {
 "p11": { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation Protocol:</b> Exceptional Lie group tensor symmetry checks during cross-cultural alignment mergers." },
 "p12": { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation Protocol:</b> Continuous recursive reinforcement optimization of the meta-alignment system." }
 };
-"c9": { title: "Scale Matrix // Quasars", text: "<b>Cosmological Scale:</b> Hyper-luminescent cosmic beacons.<br><b>Socio-Technical Mapping:</b> Absolute Axiology Core. 12 supreme humanitarian constants.<br><br><b>Core Middleware Role:</b> Bioethical Compliance Verifier (Guardian of the Blessing of Life)." },
-"c10": { title: "Scale Matrix // Dark Matter", text: "<b>Cosmological Scale:</b> Invisible structural framework of mass.<br><b>Socio-Technical Mapping:</b> Advanced Psychotechniques and latent human capital reserves.<br><br><b>Core Middleware Role:</b> Regenerative Biocenoses Eco-Engineer (Earth Synchronizer)." },
-"c11": { title: "Scale Matrix // Black Holes", text: "<b>Cosmological Scale:</b> Gravitational singularity thresholds.<br><b>Socio-Technical Mapping:</b> 12 Global Ideologies and macroeconomic geopolitical doctrines.<br><br><b>Core Middleware Role:</b> Master of Noosphere Architecture & Offline Spaces." },
-"c12": { title: "Scale Matrix // Dark Energy", text: "<b>Cosmological Scale:</b> Universal expansion constant.<br><b>Socio-Technical Mapping:</b> Transcendent Spiritual Practices & post-material motivation structures.<br><br><b>Core Middleware Role:</b> Mentor of Creative Craftsmanship (Mind Games Teacher)." },
-"c13": { title: "QUADRANT 13: THE VOIDS MATRIX // Noosphere Immune System Enclave", text: "<b>Avers (Cosmological):</b> Spatial voids, interstellar dust, gaseous anomalies.<br>• <i>1. Cosmological Voids:</i> Absolute structural vacuum.<br>• <i>2. Cosmic Dust Clouds:</i> High-entropy particles.<br>• <i>12. False Vacuum States:</i> Auditing the project for hidden parasitism.<br><br><b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." },
-"p1": { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation Protocol:</b> Resource and computational capacity balancing metrics." },
-"p2": { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation Protocol:</b> Multi-dimensional wave interference of value matrices." },
-"p3": { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation Protocol:</b> Multi-agent network emergence & synergy loop validation." },
-"p4": { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation Protocol:</b> Parallel timeline forks & hyper-stochastic forecasting." },
-"p5": { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation Protocol:</b> Enforcing deep structural self-similarity across the scale grid." },
-"p6": { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation Protocol:</b> Edge-computed peer-to-peer zero-knowledge consensus architecture." },
-"p7": { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation Protocol:</b> Hard silicon-enclave safety veto routine via hardware HSM-AC chip.<br><br><b>Core Middleware Role:</b> Frontier IT Auditor (Cyber-Immunity Forensic Engineer)." },
-"p8": { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation Protocol:</b> Cybernetic feedback topology linking simulated spaces to Reality." },
-"p9": { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation Protocol:</b> Epochal data garbage collection & cyclic state optimization loops." },
-"p10": { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation Protocol:</b> Hard cryptographic isolation safeguarding human agency, free will and mental privacy." },
-"p11": { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation Protocol:</b> Exceptional Lie group tensor symmetry checks during cross-cultural alignment mergers." },
-"p12": { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation Protocol:</b> Continuous recursive reinforcement optimization of the meta-alignment system." }
-};
+
 const modal = document.getElementById('info-modal');
 const modalTitle = document.getElementById('info-title');
 const modalText = document.getElementById('info-text');
@@ -249,135 +263,47 @@ const closeBtn = document.getElementById('modal-close-btn');
 
 coreBox.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (michaelQuestStage === 0) {
-        document.querySelector('.responsive-container').style.opacity = '0';
-        setTimeout(() => {
-            document.querySelector('.responsive-container').style.display = 'none';
-            document.getElementById('noosphere-auth-gate').style.display = 'block';
-        }, 400);
-        michaelQuestStage = 0.5;
+    if (!coreBox.classList.contains('expanded')) {
+        document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
+        coreBox.classList.add('expanded');
+        const info = ontologyDatabase["c7"];
+        if (info) {
+            modalTitle.innerText = info.title;
+            modalText.innerHTML = info.text;
+            modal.style.display = 'block';
+        }
+    } else {
+        alert("Redirecting to Secure Control Console Registry. Enter cryptographic key authorization.");
     }
 });
 
-function handleAuthChoice(event) {
-    if (michaelQuestStage !== 0.5) return;
-    const card = document.getElementById('interactive-card');
-    const computedStyle = window.getComputedStyle(card);
-    const transformMatrix = computedStyle.getPropertyValue('transform');
-    let isRevers = false;
-    if (transformMatrix !== 'none') {
-        const values = transformMatrix.split('(')[1].split(')')[0].split(',');
-        const a = parseFloat(values[0]);
-        if (a < 0) isRevers = true;
-    }
-    card.style.animation = 'none';
-    if (isRevers) {
-        alert("Enter your unique Noosphere Star ID and cryptographic key password.");
-        exitToGalaxyMap();
-    } else {
-        document.getElementById('noosphere-auth-gate').style.display = 'none';
-        document.getElementById('main-cockpit').style.display = 'flex';
-        document.getElementById('hud-minimap').style.display = 'block';
-        document.getElementById('hud-vcard').style.display = 'block';
-        michaelQuestStage = 1;
-    }
-}
-
-function advanceMichaelQuest() {
-    const qText = document.getElementById('quest-text');
-    const qBtn = document.getElementById('action-btn');
-    const termStatus = document.getElementById('term-status');
-    const vcardMeta = document.getElementById('hud-usermeta');
-    const mapStage = document.getElementById('hud-map-stage');
-
-    if (michaelQuestStage === 1) {
-        michaelQuestStage = 2;
-        termStatus.innerText = "🚨 CIRCUIT_BREAKER_TRIGGERED // S-13 VOID_MATRIX";
-        termStatus.style.color = "#ef4444";
-        document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(0,0,0,0.98) 100%)";
-        vcardMeta.innerText = "Rank: Champion of Research // Stage 2";
-        vcardMeta.style.color = "#ffb800";
-        mapStage.innerHTML = '<span style="color:#ef4444; font-weight:bold;">STAGE 2/5</span><span>VOID MATRIX</span>';
-
-        qText.innerHTML = "<b>[AI-NAVIGATOR]: Threat Detected!</b> Internal system scan via Neo4j Graph revealed fatal architecture flows:<br>" +
-                          "<span style='color:#ef4444; font-weight:bold;'>• Point 3: Interstellar Gas Dispersion (Systemic Risks)</span><br>" +
-                          "<span style='color:#ef4444; font-weight:bold;'>• Point 12: False Vacuum Quantum States (Existential Illusions)</span><br><br>" +
-                          "<i>Project has been forced to VOID_SANDBOX for remediation. Use Atticus Finch's wisdom: protect those who cannot protect themselves!</i>";
-        qBtn.innerText = "APPLY ATTICUS INSIGHT (FIX PROTOTYPE)";
-        qBtn.style.borderColor = "#ef4444";
-        
-    } else if (michaelQuestStage === 2) {
-        michaelQuestStage = 3;
-        termStatus.innerText = "⚙️ PROTOTYPE_ENCLAVE // COMPLIANCE_OK";
-        termStatus.style.color = "#bd00ff";
-        document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(189,0,255,0.1) 0%, rgba(0,0,0,0.97) 100%)";
-        vcardMeta.innerText = "Rank: Lord of the Prototype // Stage 3";
-        vcardMeta.style.color = "#00f0ff";
-        mapStage.innerHTML = '<span style="color:#bd00ff; font-weight:bold;">STAGE 3/5</span><span>PROTOTYPE</span>';
-
-        qText.innerHTML = "<b>[AI-NAVIGATOR]: Vulnerabilities Patched.</b> Manhattan Project ethos applied: code is transformed into a controlled instrument of defense. Cyber-protection bot prototype compiled and ready for sovereign gateways.";
-        qBtn.innerText = "INTEGRATE TO NATIONAL PROTOCOLS";
-        qBtn.style.borderColor = "#bd00ff";
-        
-    } else if (michaelQuestStage === 3) {
-        michaelQuestStage = 4;
-        termStatus.innerText = "🌊 SOVEREIGN_SHUTTLE_GATEWAY // REALITY_DEPLOY";
-        termStatus.style.color = "#ffb800";
-        document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(0,240,255,0.05) 0%, rgba(13,21,39,0.98) 100%)";
-        vcardMeta.innerText = "Rank: Titan of Realization // Stage 4";
-        vcardMeta.style.color = "#ffb800";
-        mapStage.innerHTML = '<span style="color:#ffb800; font-weight:bold;">STAGE 4/5</span><span>NATIONAL GATE</span>';
-
-        qText.innerHTML = "<b>[AI-NAVIGATOR]: Sovereign gateway validation succeeded.</b> Bot embedded into USA national data defense layers. The 'Invisible Shield' of cyber-sovereignty is online. Critical infrastructure assets secured.";
-        qBtn.innerText = "SCALE TO GLOBAL NOOSPHERE (FINAL)";
-        qBtn.style.borderColor = "#ffb800";
-        
-    } else if (michaelQuestStage === 4) {
-        michaelQuestStage = 5;
-        termStatus.innerText = "👑 CONSOLIDATOR OF WORLDS // TRIUMPH";
-        termStatus.style.color = "#00f0ff";
-        document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(0,240,255,0.15) 0%, rgba(0,0,0,0.95) 100%)";
-        vcardMeta.innerText = "Rank: Consolidator of Worlds // DIAMOND";
-        vcardMeta.style.color = "#fff";
-        mapStage.innerHTML = '<span style="color:#00f0ff; font-weight:bold;">FINAL STAGE</span><span>GLOBAL SHIELD</span>';
-
-        qText.innerHTML = "<b>[MISSION COMPLETED]: You are now the 'Invisible Shield' of humanity!</b> Michael's bot dynamically isolates cross-border malicious vectors globally in real-time. Diamond-tier world consolidation rank granted.";
-        qBtn.innerText = "RETURN TO GALAXY MAIN GRID";
-        qBtn.style.borderColor = "#00f0ff";
-        
-    } else if (michaelQuestStage === 5) {
-        exitToGalaxyMap();
-    }
-}
-
-function exitToGalaxyMap() {
-    michaelQuestStage = 0;
-    document.getElementById('main-cockpit').style.display = 'none';
-    document.getElementById('noosphere-auth-gate').style.display = 'none';
-    document.getElementById('hud-minimap').style.display = 'none';
-    document.getElementById('hud-vcard').style.display = 'none';
-    document.querySelector('.responsive-container').style.display = 'flex';
-    setTimeout(() => { document.querySelector('.responsive-container').style.opacity = '1'; }, 50);
-    document.getElementById('main-cockpit').style.background = "radial-gradient(circle, rgba(16,24,48,0.2) 0%, rgba(0,0,0,0.97) 100%)";
-    document.getElementById('interactive-card').style.animation = 'autoNoosphereFlip 6s cubic-bezier(0.4, 0, 0.2, 1) infinite';
-}
 document.querySelectorAll('.geo-element').forEach(element => {
     element.addEventListener('click', (e) => {
         e.stopPropagation();
         if (e.currentTarget === coreBox) return; 
         document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        const dataId = e.currentTarget.getAttribute('data-id');
+        const clickedElement = e.currentTarget;
+        clickedElement.classList.add('active');
+        const dataId = clickedElement.getAttribute('data-id');
         const info = ontologyDatabase[dataId];
         if (info) {
             modalTitle.innerText = info.title;
             modalText.innerHTML = info.text;
             modal.style.display = 'block';
         }
-        if (coreBox.classList.contains('expanded')) { coreBox.classList.remove('expanded'); }
+        if (coreBox.classList.contains('expanded')) {
+            resetCoreBox();
+        }
     });
 });
-closeBtn.addEventListener('click', (e) => { e.stopPropagation(); modal.style.display = 'none'; document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active')); coreBox.classList.remove('expanded'); });
+
+function resetCoreBox() { coreBox.classList.remove('expanded'); }
+function closeModal() {
+    modal.style.display = 'none';
+    document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
+    resetCoreBox();
+}
+closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
 </script>
 
 <style>
