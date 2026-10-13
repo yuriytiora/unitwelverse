@@ -195,140 +195,66 @@ box-sizing: border-box;
 <div class="modal-body" id="info-text">Select any architectural node tile to examine parameters.</div>
 </div>
 <script>
-const userLang = (navigator.language || navigator.userLanguage).startsWith('ru') ? 'ru' : 'en';
-
+// Жесткая фиксация базового международного языка оригинала
 const ontologyDatabase = {
-"c1": { 
-    ru: { title: "Scale Matrix // Superclusters of Galaxies (Сверхскопления)", text: "<b>Космический инвариант:</b> Метагалактические нити и суперкластеры.<br><b>Социо-технический контур:</b> 12 Цивилизационных Кластеров глобального сопряжения.<br><br><b>Интерфейс Core Middleware:</b> Валидатор семантических маркеров (Этический Лингво-арбитр)." },
-    en: { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Cosmological Scale:</b> Megascale structural filaments.<br><b>Socio-Technical Mapping:</b> 12 Civilizational Clusters.<br><br><b>Core Middleware Role:</b> Validator of Semantic Markers (Ethical Lingvo-Arbiter). Auditing latent cynicism." }
-},
-"c2": { 
-    ru: { title: "Scale Matrix // Galaxies (Галактики)", text: "<b>Космический инвариант:</b> Гравитационно-связанные звездные системы.<br><b>Социо-технический контур:</b> 12 Базовых Сфер человеческого бытия и контур Лексического Приоритета.<br><br><b>Интерфейс Core Middleware:</b> Архитектор кросс-культурных мостов (Дипломат Созвучия)." },
-    en: { title: "Scale Matrix // Galaxies", text: "<b>Cosmological Scale:</b> Massive gravitationally bound stellar structures.<br><b>Socio-Technical Mapping:</b> 12 Core Spheres & Lexical Priority circuit.<br><br><b>Core Middleware Role:</b> Architect of Cross-Cultural Bridges (Harmony Diplomat)." }
-},
-"c3": { 
-    ru: { title: "Scale Matrix // Clusters of Galaxies (Скопления)", text: "<b>Космический инвариант:</b> Локальные группы и взаимодействующие концентрации систем.<br><b>Социо-технический контур:</b> 195 Суверенных Государств многополярного мира.<br><br><b>Интерфейс Core Middleware:</b> Навигатор Войдов // Тьютор когнитивного и смыслового развития." },
-    en: { title: "Scale Matrix // Clusters of Galaxies", text: "<b>Cosmological Scale:</b> Interacting concentrations of systems.<br><b>Socio-Technical Mapping:</b> 195 Sovereign Nations.<br><br><b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." }
-},
-"c4": { 
-    ru: { title: "Scale Matrix // Stellar Clusters (Звездные скопления)", text: "<b>Космический инвариант:</b> Плотные гравитационные семьи звезд.<br><b>Социо-технический контур:</b> Координированные бесконфликтные Коллективы.<br><br><b>Интерфейс Core Middleware:</b> Хранитель Традиций и Исторического наследия (Цивилизационный Верификатор)." },
-    en: { title: "Scale Matrix // Stellar Clusters", text: "<b>Cosmological Scale:</b> Densely bound stellar families.<br><b>Socio-Technical Mapping:</b> Coordinated Collectives.<br><br><b>Core Middleware Role:</b> Guardian of Traditions & Historical Heritage (Civilizational Verifier)." }
-},
+"c1": { title: "Scale Matrix // Superclusters of Galaxies", text: "<b>Cosmological Scale:</b> Megascale structural filaments.<br><b>Socio-Technical Mapping:</b> 12 Civilizational Clusters.<br><br><b>Core Middleware Role:</b> Validator of Semantic Markers (Ethical Lingvo-Arbiter). Auditing latent cynicism." },
+"c2": { title: "Scale Matrix // Galaxies", text: "<b>Cosmological Scale:</b> Massive gravitationally bound stellar structures.<br><b>Socio-Technical Mapping:</b> 12 Core Spheres & Lexical Priority circuit.<br><br><b>Core Middleware Role:</b> Architect of Cross-Cultural Bridges (Harmony Diplomat)." },
+"c3": { title: "Scale Matrix // Clusters of Galaxies", text: "<b>Cosmological Scale:</b> Interacting concentrations of systems.<br><b>Socio-Technical Mapping:</b> 195 Sovereign Nations.<br><br><b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." },
+"c4": { title: "Scale Matrix // Stellar Clusters", text: "<b>Cosmological Scale:</b> Densely bound stellar families.<br><b>Socio-Technical Mapping:</b> Coordinated Collectives.<br><br><b>Core Middleware Role:</b> Guardian of Traditions & Historical Heritage (Civilizational Verifier)." },
 "c5": { 
-    ru: { 
-        title: "МАТРИЦА СПУТНИКОВ ПРОФЕССИОНАЛИЗМА // Код: АПЕКЭЭПЭЭИСО", 
-        text: "<b>12 Критериев Качественного Аудита Инноваций (Паспорт Спутников):</b><br>" +
-              "• <i>Актуальность (А):</i> ИИ адаптирует проект под тренды.<br>" +
-              "• <i>Практичность (П):</i> ИИ упрощает интерфейсы.<br>" +
-              "• <i>Этичность (Э):</i> Блокирует скрытую эксплуатацию людей.<br>" +
-              "• <i>Оригинальность (О):</i> Международный патентный аудит.<br>" +
-              "• <i>Искусность (И):</i> Шлифует системную архитектуру.<br><br>" +
-              "<b>Интерфейс Core Middleware:</b> Модератор 'Звездных скоплений'." 
-    },
-    en: { 
-        title: "THE SATELLITES MATRIX OF PROFESSIONALISM // Code: APEC_EEPEE_ISO", 
-        text: "<b>12 Criteria for High-Fidelity Innovation Audit (Satellites Passport):</b><br>" +
-              "• <i>Relevance (A):</i> AI adapts the project to global trends.<br>" +
-              "• <i>Practicality (P):</i> AI refines complex interfaces.<br>" +
-              "• <i>Ethics (E):</i> AI blocks hidden human exploitation.<br>" +
-              "• <i>Originality (O):</i> Automated patent audit and branding.<br>" +
-              "• <i>Artistry (I):</i> Conducts deep structural optimization.<br><br>" +
-              "<b>Core Middleware Role:</b> Stellar Clusters Moderator." 
-    }
+    title: "THE SATELLITES MATRIX OF PROFESSIONALISM // Code: APEC_EEPEE_ISO", 
+    text: "<b>12 Criteria for High-Fidelity Innovation Audit (Satellites Passport):</b><br>" +
+          "• <i>Relevance (A):</i> Evaluates market demand. AI adapts the project to global trends.<br>" +
+          "• <i>Practicality (P):</i> Verifies integration friction. AI refines complex interfaces.<br>" +
+          "• <i>Ethics (E):</i> Aligns goals with Alpha Quasars. AI blocks hidden human exploitation.<br>" +
+          "• <i>Originality (O):</i> Automated patent audit. AI enhances distinct global branding.<br>" +
+          "• <i>Artistry (I):</i> Conducts deep structural optimization and architecture polishing.<br><br>" +
+          "<b>Core Middleware Role:</b> Facilitator of Psychological Kinship (Stellar Clusters Moderator)." 
 },
 "c6": { 
-    ru: { 
-        title: "КВАДРАТ 6: ВЕКТОР РАЗВИТИЯ ИННОВАЦИЙ // Жизненный Цикл 'Планеты'", 
-        text: "<b>Операционная сетка ИИ-Навигатора Платформы (Системное ТЗ):</b><br>" +
-              "• <i>1. Мечта / Идея:</i> Зарождение замысла, оценка оригинальности.<br>" +
-              "• <i>2. Анализ проблемы и рынка:</i> Исследование потребностей. ИИ выявляет «боли».<br>" +
-              "• <i>4. Создание прототипа:</i> Разработка MVP. ИИ помогает собрать рабочую версию.<br>" +
-              "• <i>12. Развитие:</i> Перевод инновации в режим интеграции новых закрывающих технологий.<br><br>" +
-              "<b>Интерфейс Core Middleware:</b> Проектировщик этичных интерфейсов (UX-Аудитор)." 
-    },
-    en: { 
-        title: "QUADRANT 6: INNOVATION EVOLUTION VECTOR // Lifecycle of the 'Planet'", 
-        text: "<b>Platform AI-Navigator Operational Grid (System Specifications):</b><br>" +
-              "• <i>1. Dream / Idea:</i> Genesis of intent; AI evaluates originality.<br>" +
-              "• <i>2. Problem Analysis:</i> AI scans precedents and highlights systemic 'pains'.<br>" +
-              "• <i>4. Prototype Creation:</i> MVP deployment and architecture compilation.<br>" +
-              "• <i>12. Development:</i> Long-term sustainability via frontier tech injection.<br><br>" +
-              "<b>Core Middleware Role:</b> Human-Centric UX Auditor." 
-    }
+    title: "QUADRANT 6: INNOVATION EVOLUTION VECTOR // Lifecycle of the 'Planet'", 
+    text: "<b>Platform AI-Navigator Operational Grid (System Specifications):</b><br>" +
+          "• <i>1. Dream / Idea / Innovation:</i> Genesis of intent; AI evaluates originality and target demographics.<br>" +
+          "• <i>2. Problem & Market Analysis:</i> Deep demand mapping. AI scans precedents and highlights systemic 'pains'.<br>" +
+          "• <i>4. Prototype Creation:</i> MVP deployment. AI aids in assembling and documenting the runtime architecture.<br>" +
+          "• <i>12. Development / Evolution:</i> Long-term sustainability; continuous recursive injection of frontier tech.<br><br>" +
+          "<b>Core Middleware Role:</b> Human-Centric UX Auditor // Designer of Ethical Interfaces." 
 },
-"c7": { 
-    ru: { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>Статус системы:</b> Активна (Operational).<br><b>Архитектура:</b> Распределенная децентрализованная Ноосферная Операционная Система выравнивания ценностей ИИ.<br><br><i>Примечание: Повторный клик по Ядру активирует переход в защищенный реестр Консоли Управления.</i>" },
-    en: { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>System Status:</b> Operational.<br><b>Core Architecture:</b> Decentralized Distributed Noosphere AGI Value Alignment Operating System.<br><br><i>Notice: Secondary click on the Core activates redirection to the Secure Control Console Registry.</i>" }
-},
+"c7": { title: "UNITWELVERSE // Core Invariant Engine", text: "<b>System Status:</b> Operational.<br><b>Core Architecture:</b> Decentralized Distributed Noosphere AGI Value Alignment Operating System.<br><br><i>Notice: Secondary click on the Core activates redirection to the Secure Control Console Registry (cryptographic key authorization required).</i>" },
 "c8": { 
-    ru: { 
-        title: "КВАДРАТ 8: РАДАР ТРЕНДОВ-АСТЕРОИДОВ // Глобальные Возмущения Цивилизации", 
-        text: "<b>Суть контура:</b> Внешние макро-ориентиры и точки сцепления проекта (Резонанс ИИ):<br>" +
-              "• <i>1. Многополярный мир:</i> Разрушение однополярной системы. Горизонтальное сетевое взаимодействие без диктата.<br>" +
-              "• <i>3. Реструктуризация ООН:</i> Паралич старых институтов. Проект как ячейка в новой цифровой архитектуре.<br>" +
-              "• <i>7. Полный Диалог Цивилизаций:</i> Глубинный синтез ценностей Востока, Запада, Севера и Юга.<br>" +
-              "• <i>12. Новая космическая эра:</i> Выход из земной колыбели и ноосферная космическая этика.<br><br>" +
-              "<b>Интерфейс Core Middleware:</b> Координатор общинной взаимопомощи (Логист Солидарности)." 
-    },
-    en: { 
-        title: "QUADRANT 8: ASTEROID TRENDS RADAR // Global Civilizational Disturbances", 
-        text: "<b>External Macro-Orientation Anchors (AI Resonance Interface):</b><br>" +
-              "• <i>1. Multipolar World:</i> Dissolution of unipolar hegemony. Enforcing horizontal peer-to-peer networks.<br>" +
-              "• <i>3. UN Restructuring:</i> Paralysis of legacy institutions. Project acts as a node in the new digital architecture.<br>" +
-              "• <i>7. Total Dialogue of Civilizations:</i> Deep synthesis of core axiology of East, West, North, and South.<br>" +
-              "• <i>12. New Space Era:</i> Transition into cosmic habitats; enforcing planetary noospheric cosmic ethics.<br><br>" +
-              "<b>Core Middleware Role:</b> Solidarity Logician // Community Mutual Assistance Coordinator." 
-    }
+    title: "QUADRANT 8: ASTEROID TRENDS RADAR // Global Civilizational Disturbances", 
+    text: "<b>External Macro-Orientation Anchors (AI Resonance Interface):</b><br>" +
+          "• <i>1. Multipolar World:</i> Dissolution of unipolar hegemony. Enforcing horizontal peer-to-peer networks.<br>" +
+          "• <i>3. UN Restructuring:</i> Paralysis of legacy institutions. Project acts as a node in the new digital architecture.<br>" +
+          "• <i>7. Total Dialogue of Civilizations:</i> Deep synthesis of core axiology of East, West, North, and South.<br>" +
+          "• <i>12. New Space Era:</i> Transition into cosmic habitats; enforcing planetary noospheric cosmic ethics.<br><br>" +
+          "<b>Core Middleware Role:</b> Solidarity Logician // Community Mutual Assistance Coordinator." 
 },
-"c9": { 
-    ru: { title: "Scale Matrix // Quasars (Квазары)", text: "<b>Космический инвариант:</b> Гипер-люминесцентные маяки Вселенной.<br><b>Социо-технический контур:</b> Absolute Axiology Core. 12 высших гуманитарных констант.<br><br><b>Интерфейс Core Middleware:</b> Верификатор биоэтического комплаенса (Хранитель Блага Жизни)." },
-    en: { title: "Scale Matrix // Quasars", text: "<b>Cosmological Scale:</b> Hyper-luminescent cosmic beacons.<br><b>Socio-Technical Mapping:</b> Absolute Axiology Core. 12 supreme humanitarian constants.<br><br><b>Core Middleware Role:</b> Bioethical Compliance Verifier (Guardian of the Blessing of Life)." }
-},
-"c10": { 
-    ru: { title: "Scale Matrix // Dark Matter (Темная Материя)", text: "<b>Космический инвариант:</b> Невидимый гравитационный каркас масс.<br><b>Социо-технический контур:</b> Прогрессивные Психотехники и скрытые резервы человеческого капитала.<br><br><b>Интерфейс Core Middleware:</b> Эко-инженер регенеративных биоценозов (Земной Синхронизатор)." },
-    en: { title: "Scale Matrix // Dark Matter", text: "<b>Cosmological Scale:</b> Invisible structural framework of mass.<br><b>Socio-Technical Mapping:</b> Advanced Psychotechniques and latent human capital reserves.<br><br><b>Core Middleware Role:</b> Regenerative Biocenoses Eco-Engineer (Earth Synchronizer)." }
-},
-"c11": { 
-    ru: { title: "Scale Matrix // Black Holes (Черные Дыры)", text: "<b>Космический инвариант:</b> Сингулярности экстремальной гравитации.<br><b>Социо-технический контур:</b> 12 Глобальных Идеологий и геополитических доктрин Reality.<br><br><b>Интерфейс Core Middleware:</b> Мастер ноосферной архитектуры и оффлайн-пространств." },
-    en: { title: "Scale Matrix // Black Holes", text: "<b>Cosmological Scale:</b> Gravitational singularity thresholds.<br><b>Socio-Technical Mapping:</b> 12 Global Ideologies and macroeconomic geopolitical doctrines.<br><br><b>Core Middleware Role:</b> Master of Noosphere Architecture & Offline Spaces." }
-},
-"c12": { 
-    ru: { title: "Scale Matrix // Dark Energy (Темная Энергия)", text: "<b>Космический инвариант:</b> Константная сила расширения пространства.<br><b>Социо-технический контур:</b> Трансцендентные Духовные Практики и нематериальная мотивация.<br><br><b>Интерфейс Core Middleware:</b> Наставник созидательного мастерства (Игры Разума)." },
-    en: { title: "Scale Matrix // Dark Energy", text: "<b>Cosmological Scale:</b> Universal expansion constant.<br><b>Socio-Technical Mapping:</b> Transcendent Spiritual Practices & post-material motivation structures.<br><br><b>Core Middleware Role:</b> Mentor of Creative Craftsmanship (Mind Games Teacher)." }
-},
+"c9": { title: "Scale Matrix // Quasars", text: "<b>Cosmological Scale:</b> Hyper-luminescent cosmic beacons.<br><b>Socio-Technical Mapping:</b> Absolute Axiology Core. 12 supreme humanitarian constants.<br><br><b>Core Middleware Role:</b> Bioethical Compliance Verifier (Guardian of the Blessing of Life)." },
+"c10": { title: "Scale Matrix // Dark Matter", text: "<b>Cosmological Scale:</b> Invisible structural framework of mass.<br><b>Socio-Technical Mapping:</b> Advanced Psychotechniques and latent human capital reserves.<br><br><b>Core Middleware Role:</b> Regenerative Biocenoses Eco-Engineer (Earth Synchronizer)." },
+"c11": { title: "Scale Matrix // Black Holes", text: "<b>Cosmological Scale:</b> Gravitational singularity thresholds.<br><b>Socio-Technical Mapping:</b> 12 Global Ideologies and macroeconomic geopolitical doctrines.<br><br><b>Core Middleware Role:</b> Master of Noosphere Architecture & Offline Spaces." },
+"c12": { title: "Scale Matrix // Dark Energy", text: "<b>Cosmological Scale:</b> Universal expansion constant.<br><b>Socio-Technical Mapping:</b> Transcendent Spiritual Practices & post-material motivation structures.<br><br><b>Core Middleware Role:</b> Mentor of Creative Craftsmanship (Mind Games Teacher)." },
 "c13": { 
-    ru: { 
-        title: "КВАДРАТ 13: МАТРИЦА ВОЙДОВ // Иммунная Система Ноосферы", 
-        text: "<b>Аверс (Космообъект):</b> Войды, космическая пыль, межзвездный газ, аномалии.<br>" +
-              "• <i>1. Космические Войды:</i> Структурная пустота. ИИ проверяет проект на отсутствие фундамента.<br>" +
-              "• <i>2. Облака Пыли:</i> Мелкие частицы. ИИ отфильтровывает хаотические элементы и белый шум.<br>" +
-              "• <i>12. Ложный Вакуум:</i> Метастабильные состояния. Аудит на предмет скрытого паразитизма и манипуляций контуром.<br><br>" +
-              "<b>Интерфейс Core Middleware:</b> Навигатор Войдов // Тьютор когнитивного и смыслового развития." 
-    },
-    en: { 
-        title: "QUADRANT 13: THE VOIDS MATRIX // Noosphere Immune System Enclave", 
-        text: "<b>Avers (Cosmological):</b> Spatial voids, interstellar dust, gaseous anomalies.<br>" +
-              "• <i>1. Cosmological Voids:</i> Absolute structural vacuum. AI tests the innovation for architectural substance.<br>" +
-              "• <i>2. Cosmic Dust Clouds:</i> High-entropy particles. AI filtering pipeline isolates background white noise.<br>" +
-              "• <i>12. False Vacuum States:</i> Metastable decay traps. Auditing the project for hidden parasitism or vector drift.<br><br>" +
-              "<b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." 
+    title: "QUADRANT 13: THE VOIDS MATRIX // Noosphere Immune System Enclave", 
+    text: "<b>Avers (Cosmological):</b> Spatial voids, interstellar dust, gaseous anomalies.<br>" +
+          "• <i>1. Cosmological Voids:</i> Absolute structural vacuum. AI tests the innovation for architectural substance.<br>" +
+          "• <i>2. Cosmic Dust Clouds:</i> High-entropy particles. AI filtering pipeline isolates background white noise.<br>" +
+          "• <i>12. False Vacuum States:</i> Metastable decay traps. Auditing the project for hidden parasitism or vector drift.<br><br>" +
+          "<b>Core Middleware Role:</b> Voids Navigator // Tutor of Cognitive & Semantic Development." 
     }
 },
-"p1": { ru: { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation:</b> Метрики баланса ресурсов и мощностей." }, en: { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation Protocol:</b> Resource and computational capacity balancing metrics." } },
-"p2": { ru: { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation:</b> Волновые интерференции ценностных весов." }, en: { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation Protocol:</b> Multi-dimensional wave interference of value matrices." } },
-"p3": { ru: { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation:</b> Синергетические циклы сетевого взаимодействия." }, en: { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation Protocol:</b> Multi-agent network emergence & synergy loop validation." } },
-"p4": { ru: { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation:</b> Расчет параллельных временных линий." }, en: { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation Protocol:</b> Parallel timeline forks & hyper-stochastic forecasting." } },
-"p5": { ru: { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation:</b> Контроль структурного самоподобия фрактала." }, en: { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation Protocol:</b> Enforcing deep structural self-similarity across the scale grid." } },
-"p6": { ru: { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation:</b> Распределенный реестр p2p." }, en: { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation Protocol:</b> Edge-computed peer-to-peer zero-knowledge consensus architecture." } },
-"p7": { 
-    ru: { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation:</b> Вето-замок на уровне кремния чипа HSM-AC.<br><br><b>Core Middleware Role:</b> Пограничный ИТ-аудитор (Судебный инженер Кибер-Иммунитета)." }, 
-    en: { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation Protocol:</b> Hard silicon-enclave safety veto routine via hardware HSM-AC chip.<br><br><b>Core Middleware Role:</b> Frontier IT Auditor (Cyber-Immunity Forensic Engineer)." } 
-},
-"p8": { ru: { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation:</b> Обратные кибернетические петли сопряжения." }, en: { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation Protocol:</b> Cybernetic feedback topology linking simulated spaces to Reality." } },
-"p9": { ru: { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation:</b> Протоколы циклической очистки рутинных процессов." }, en: { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation Protocol:</b> Epochal data garbage collection & cyclic state optimization loops." } },
-"p10": { ru: { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation:</b> Защита свободы воли и автономии человека." }, en: { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation Protocol:</b> Hard cryptographic isolation safeguarding human agency, free will and mental privacy." } },
-"p11": { ru: { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation:</b> Тензорные петли симметрии LoRA-весов." }, en: { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation Protocol:</b> Exceptional Lie group tensor symmetry checks during cross-cultural alignment mergers." } },
-"p12": { ru: { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation:</b> Рекурсивные алгоритмы оптимизации Middleware." }, en: { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation Protocol:</b> Continuous recursive reinforcement optimization of the meta-alignment system." } }
+"p1": { title: "Model Invariant 1 // Lambda-CDM Model", text: "<b>ASI Validation Protocol:</b> Resource and computational capacity balancing metrics." },
+"p2": { title: "Model Invariant 2 // Superstring Theory", text: "<b>ASI Validation Protocol:</b> Multi-dimensional wave interference of value matrices." },
+"p3": { title: "Model Invariant 3 // Hadron Bootstrap", text: "<b>ASI Validation Protocol:</b> Multi-agent network emergence & synergy loop validation." },
+"p4": { title: "Model Invariant 4 // Multiverse Simulation", text: "<b>ASI Validation Protocol:</b> Parallel timeline forks & hyper-stochastic forecasting." },
+"p5": { title: "Model Invariant 5 // Fractal Cosmology", text: "<b>ASI Validation Protocol:</b> Enforcing deep structural self-similarity across the scale grid." },
+"p6": { title: "Model Invariant 6 // Holographic Principle", text: "<b>ASI Validation Protocol:</b> Edge-computed peer-to-peer zero-knowledge consensus architecture." },
+"p7": { title: "Model Invariant 7 // Anthropic Principle", text: "<b>ASI Validation Protocol:</b> Hard silicon-enclave safety veto routine via hardware HSM-AC chip.<br><br><b>Core Middleware Role:</b> Frontier IT Auditor (Cyber-Immunity Forensic Engineer)." },
+"p8": { title: "Model Invariant 8 // Cyber-Physical Cosmos", text: "<b>ASI Validation Protocol:</b> Cybernetic feedback topology linking simulated spaces to Reality." },
+"p9": { title: "Model Invariant 9 // Penrose CCC", text: "<b>ASI Validation Protocol:</b> Epochal data garbage collection & cyclic state optimization loops." },
+"p10": { title: "Model Invariant 10 // Quantum Cosmology", text: "<b>ASI Validation Protocol:</b> Hard cryptographic isolation safeguarding human agency, free will and mental privacy." },
+"p11": { title: "Model Invariant 11 // Theory of Everything E8", text: "<b>ASI Validation Protocol:</b> Exceptional Lie group tensor symmetry checks during cross-cultural alignment mergers." },
+"p12": { title: "Model Invariant 12 // Neural Network Universe", text: "<b>ASI Validation Protocol:</b> Continuous recursive reinforcement optimization of the meta-alignment system." }
 };
 
 const modal = document.getElementById('info-modal');
@@ -342,14 +268,14 @@ coreBox.addEventListener('click', (e) => {
     if (!coreBox.classList.contains('expanded')) {
         document.querySelectorAll('.geo-element').forEach(node => node.classList.remove('active'));
         coreBox.classList.add('expanded');
-        const info = ontologyDatabase["c7"][userLang];
+        const info = ontologyDatabase["c7"];
         if (info) {
             modalTitle.innerText = info.title;
             modalText.innerHTML = info.text;
             modal.style.display = 'block';
         }
     } else {
-        alert(userLang === 'ru' ? "Перенаправление в реестр Консоли Управления. Требуется авторизация криптографическим ключом." : "Redirecting to Secure Control Console Registry. Enter cryptographic key authorization.");
+        alert("Redirecting to Secure Control Console Registry. Enter cryptographic key authorization.");
     }
 });
 
@@ -361,7 +287,7 @@ document.querySelectorAll('.geo-element').forEach(element => {
         const clickedElement = e.currentTarget;
         clickedElement.classList.add('active');
         const dataId = clickedElement.getAttribute('data-id');
-        const info = ontologyDatabase[dataId][userLang];
+        const info = ontologyDatabase[dataId];
         if (info) {
             modalTitle.innerText = info.title;
             modalText.innerHTML = info.text;
