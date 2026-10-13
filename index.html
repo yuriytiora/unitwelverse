@@ -148,6 +148,25 @@
  .modal-body { font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; text-align: left; }
  .modal-close { position: absolute; top: 12px; right: 15px; background: none; border: none; color: #64748b; cursor: pointer; font-size: 1.1rem; }
  .modal-close:hover { color: var(--gold); }
+  /* Адаптивный щит для мобильных экранов смартфонов */
+@media (max-width: 680px) {
+    .canvas-container {
+        padding: 5px;
+        overflow: hidden;
+    }
+    .geometry-map {
+        /* Автоматически сжимает карту до ширины экрана смартфона без потери пропорций */
+        transform: scale(calc(100vw / 680));
+        transform-origin: center center;
+        max-width: 100vw;
+        max-height: 100vw;
+    }
+    #info-modal {
+        width: 95%;
+        bottom: 15px;
+        padding: 15px;
+    }
+}
  </style>
  <!-- Динамический расчет траектории взрыва додекаэдра из центральной точки (298px, 298px) -->
  <style>
