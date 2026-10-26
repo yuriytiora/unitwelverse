@@ -11,6 +11,7 @@
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
             --panel-bg: rgba(10, 25, 35, 0.7);
+            --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
         html, body { 
@@ -91,7 +92,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            z-index: 5;
+            z-index: 15;
             width: 200px;
         }
         .left-panel { left: 20px; }
@@ -108,8 +109,9 @@
             backdrop-filter: blur(10px);
         }
         .data-block:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-        .data-block span { font-size: 12px; color: #fff; font-weight: bold; }
+        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; }
+        /* Убираем белые тексты */
+        .data-block span { display: none; }
 
         /* Портрет */
         .center-portrait {
@@ -226,81 +228,107 @@
                 height: 100%;
             }
 
-            /* Портрет строго по центру иллюминатора (парит над интерфейсом) */
+            /* Портрет */
             .center-portrait {
                 position: absolute;
-                top: 42%; /* Позиция по вертикали */
+                top: 42%; 
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 180px; /* Оставляем ваш размер */
-                height: 180px; /* Оставляем ваш размер */
-                margin: 0; /* Убираем старые отступы, они больше не нужны */
+                width: 180px; 
+                height: 180px; 
+                margin: 0; 
                 z-index: 10;
             }
 
-            /* --- НЕЗАВИСИМЫЕ КНОПКИ (АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ) --- */
-            
-            /* Отключаем старые панели, чтобы они не мешали */
+            /* Независимые кнопки */
             .left-panel, .right-panel { display: contents; }
 
-            /* Теперь каждая кнопка (data-block) имеет свой собственный якорь */
             .data-block {
                 position: absolute;
                 padding: 6px 10px;
-                z-index: 15; /* Поверх портрета */
+                z-index: 15;
             }
-            .data-block span { font-size: 10px; }
-            .data-block strong { font-size: 9px; margin-bottom: 0; }
+            .data-block strong { font-size: 10px; margin-bottom: 0; }
 
-            /* --- НАСТРОЙКА КАЖДОЙ КНОПКИ В ОТДЕЛЬНОСТИ --- */
-            /* ВЫ МОЖЕТЕ МЕНЯТЬ ЭТИ ЗНАЧЕНИЯ (top и left) ДЛЯ КАЖДОЙ КНОПКИ! */
+            /* Положение кнопок (настраивайте под себя) */
+            .left-panel .data-block:nth-child(1) { top: 85%; left: 23%; transform: translateX(-50%); } /* Страна */
+            .left-panel .data-block:nth-child(2) { top: 85%; left: 75%; transform: translateX(-50%); } /* Сфера */
+            .right-panel .data-block:nth-child(1) { top: 3%; left: 50%; transform: translateX(-50%); }  /* Проект */
+            .right-panel .data-block:nth-child(2) { top: 85%; left: 50%; transform: translateX(-50%); } /* Контакт */
 
-            /* 1. Страна (Слева сверху) */
-            .left-panel .data-block:nth-child(1) {
-                top: 85%; 
-                left: 23%; 
-                transform: translateX(-50%);
-            }
-
-            /* 2. Сфера (Справа сверху) */
-            .left-panel .data-block:nth-child(2) {
-                top: 85%; 
-                left: 75%; 
-                transform: translateX(-50%);
-            }
-
-            /* 3. Проект (Слева внизу) */
-            .right-panel .data-block:nth-child(1) {
-                top: 3%; 
-                left: 50%; 
-                transform: translateX(-50%);
-            }
-
-            /* 4. Контакт (Справа внизу) */
-            .right-panel .data-block:nth-child(2) {
-                top: 85%; 
-                left: 50%; 
-                transform: translateX(-50%);
-            }
-
-             /* 5. Кнопка "КОНТЕНТ" (Автономная) */
             .content-btn-container {
                 position: absolute;
-                top: 76%; /* <-- ВОТ ЗДЕСЬ МЕНЯЙТЕ ВЫСОТУ */
+                top: 76%; 
                 left: 50%;
                 transform: translateX(-50%);
                 z-index: 15;
             }
-           .content-btn { padding: 10px 20px; font-size: 11px; }
+            .content-btn { padding: 8px 20px; font-size: 11px; }
 
-            /* Скрываем титулы на мобильной версии */
-            .bottom-panel {
-                display: none;
-            }
+            .bottom-panel { display: none; }
+        }
+
+        /* --- МОДАЛЬНОЕ ОКНО (ИНФО-СВИТОК) --- */
+        .info-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(5, 15, 25, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--neon-glow);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 100;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.3);
+        }
+        .info-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .info-modal img {
+            max-width: 100px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--neon-glow);
+        }
+        .info-modal h3 {
+            color: var(--neon-glow);
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .info-modal p {
+            color: #e2e8f0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: var(--neon-glow);
+            font-size: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+
+    <!-- Модальное окно для информации -->
+    <div class="info-modal" id="info-modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="modal-content"></div>
+    </div>
 
     <!-- Свитки -->
     <div class="scroll-panel scroll-top" id="scroll-comrades">
@@ -328,10 +356,35 @@
     <script>
         const selectedComrade = localStorage.getItem('selectedComrade') || 'michael';
         
+        // База данных героев (добавлены поля для всплывающих окон)
         const database = {
-            'michael': { name: 'Майкл', country: 'США', sphere: 'Киберсфера', project: 'ИИ-бот для киберзащиты', image: 'michael.webp', titles: ['Звезда Инициативы', 'Чемпион Исследований'] },
-            'vladimir': { name: 'Владимир', country: 'Россия', sphere: 'Геосфера', project: 'Станции мониторинга мерзлоты', image: 'birch.jpg', titles: ['Звезда Инициативы', 'Фронтмен Возрождения'] },
-            'dilnoza': { name: 'Дильноза', country: 'Узбекистан', sphere: 'Образование', project: 'Платформа наставничества', image: 'bee.jpg', titles: ['Звезда Инициативы', 'Гуру Коллаборации'] }
+            'michael': { 
+                name: 'Майкл', country: 'США', sphere: 'Киберсфера', 
+                project: 'ИИ-бот для киберзащиты', image: 'michael.webp', 
+                titles: ['Звезда Инициативы', 'Чемпион Исследований'],
+                countryInfo: 'Соединенные Штаты Америки — лидер в сфере IT и кибербезопасности.',
+                sphereInfo: 'Киберсфера — область цифровых технологий, защиты данных и ИИ.',
+                projectInfo: 'Разработка ИИ-бота, способного предсказывать и предотвращать кибератаки.',
+                flag: 'https://flagcdn.com/w320/us.png'
+            },
+            'vladimir': { 
+                name: 'Владимир', country: 'Россия', sphere: 'Геосфера', 
+                project: 'Станции мониторинга мерзлоты', image: 'birch.jpg', 
+                titles: ['Звезда Инициативы', 'Фронтмен Возрождения'],
+                countryInfo: 'Россия — страна с огромными природными ресурсами и территорией.',
+                sphereInfo: 'Геосфера — область изучения земли, климата и природных ресурсов.',
+                projectInfo: 'Создание модульных станций для контроля состояния вечной мерзлоты.',
+                flag: 'https://flagcdn.com/w320/ru.png'
+            },
+            'dilnoza': { 
+                name: 'Дильноза', country: 'Узбекистан', sphere: 'Образование', 
+                project: 'Платформа цифрового наставничества', image: 'bee.jpg', 
+                titles: ['Звезда Инициативы', 'Гуру Коллаборации'],
+                countryInfo: 'Узбекистан — страна с богатой историей и молодым населением.',
+                sphereInfo: 'Образование — сфера передачи знаний и развития личности.',
+                projectInfo: 'Платформа для наставничества подростков в удаленных регионах.',
+                flag: 'https://flagcdn.com/w320/uz.png'
+            }
         };
         const data = database[selectedComrade] || database['michael'];
         const container = document.getElementById('profile-container');
@@ -351,6 +404,7 @@
             </div>
         `).join('');
 
+        // В HTML-разметке убираем белые тексты (span) и добавляем вызовы функций
         container.innerHTML = `
             <div class="top-nav">
                 <button class="ui-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
@@ -359,37 +413,29 @@
             </div>
 
             <div class="main-zone">
-                <!-- 1. Верхний ряд (Страна, Сфера) -->
                 <div class="left-panel">
-                    <div class="data-block">
+                    <div class="data-block" onclick="showInfo('country')">
                         <strong>Страна</strong>
-                        <span>${data.country}</span>
                     </div>
-                    <div class="data-block">
+                    <div class="data-block" onclick="showInfo('sphere')">
                         <strong>Сфера</strong>
-                        <span>${data.sphere}</span>
                     </div>
                 </div>
 
-                <!-- 2. Портрет -->
                 <div class="center-portrait">
                     <img src="${data.image}" alt="Портрет" onerror="this.src='https://yuriytiora.github.io/unitwelve/be3.webp'">
                 </div>
 
-                <!-- 3. Кнопка Контент -->
                 <div class="content-btn-container">
                     <button class="ui-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
                 </div>
 
-                <!-- 4. Нижний ряд (Проект, Контакт) -->
                 <div class="right-panel">
-                    <div class="data-block">
+                    <div class="data-block" onclick="showInfo('project')">
                         <strong>Проект</strong>
-                        <span>${data.project}</span>
                     </div>
                     <div class="data-block" onclick="alert('Запрос на контакт отправлен ${data.name}!')">
                         <strong>Контакт</strong>
-                        <span>Связаться</span>
                     </div>
                 </div>
             </div>
@@ -408,6 +454,28 @@
                 if (panel.id !== id) panel.classList.remove('open');
             });
             el.classList.toggle('open');
+        }
+
+        // Функция для показа всплывающего окна с информацией
+        function showInfo(type) {
+            const modal = document.getElementById('info-modal');
+            const content = document.getElementById('modal-content');
+            let html = '';
+
+            if (type === 'country') {
+                html = `<img src="${data.flag}" alt="Флаг"><h3>${data.country}</h3><p>${data.countryInfo}</p>`;
+            } else if (type === 'sphere') {
+                html = `<h3>${data.sphere}</h3><p>${data.sphereInfo}</p>`;
+            } else if (type === 'project') {
+                html = `<h3>${data.project}</h3><p>${data.projectInfo}</p>`;
+            }
+
+            content.innerHTML = html;
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('info-modal').classList.remove('open');
         }
     </script>
 </body>
