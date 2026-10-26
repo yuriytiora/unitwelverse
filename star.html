@@ -238,26 +238,59 @@
                 z-index: 10;
             }
 
-            /* Ряды кнопок */
-            .left-panel, .right-panel {
-                position: static;
-                flex-direction: row;
-                width: 100%;
-                justify-content: center;
-                gap: 15px;
-                transform: none;
-            }
-            .left-panel { order: 1; margin-top: 20px; margin-bottom: 15px; }
-            .right-panel { order: 3; margin-top: 200px; } /* Опускаем правую панель вниз */
+            /* --- НЕЗАВИСИМЫЕ КНОПКИ (АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ) --- */
+            
+            /* Отключаем старые панели, чтобы они не мешали */
+            .left-panel, .right-panel { display: contents; }
 
-            /* ДЕЛАЕМ КНОПКИ ТАКИМИ ЖЕ, КАК "КОНТЕНТ" */
+            /* Теперь каждая кнопка (data-block) имеет свой собственный якорь */
             .data-block {
-                flex: 0 0 auto;
-                padding: 6px 10px; /* Такие же отступы, как у .ui-btn */
-                /* width: 130px; -- УБРАЛИ, чтобы ширина зависела от текста */
+                position: absolute;
+                padding: 6px 10px;
+                z-index: 15; /* Поверх портрета */
             }
             .data-block span { font-size: 10px; }
             .data-block strong { font-size: 9px; margin-bottom: 0; }
+
+            /* --- НАСТРОЙКА КАЖДОЙ КНОПКИ В ОТДЕЛЬНОСТИ --- */
+            /* ВЫ МОЖЕТЕ МЕНЯТЬ ЭТИ ЗНАЧЕНИЯ (top и left) ДЛЯ КАЖДОЙ КНОПКИ! */
+
+            /* 1. Страна (Слева сверху) */
+            .left-panel .data-block:nth-child(1) {
+                top: 90px; 
+                left: 10%; 
+                transform: translateX(-50%);
+            }
+
+            /* 2. Сфера (Справа сверху) */
+            .left-panel .data-block:nth-child(2) {
+                top: 90px; 
+                left: 65%; 
+                transform: translateX(-50%);
+            }
+
+            /* 3. Проект (Слева внизу) */
+            .right-panel .data-block:nth-child(1) {
+                top: 72%; 
+                left: 35%; 
+                transform: translateX(-50%);
+            }
+
+            /* 4. Контакт (Справа внизу) */
+            .right-panel .data-block:nth-child(2) {
+                top: 72%; 
+                left: 75%; 
+                transform: translateX(-50%);
+            }
+
+            /* 5. Кнопка "КОНТЕНТ" (Центр, под портретом) */
+            .content-btn-container {
+                position: absolute;
+                top: 50%; /* Подберите высоту под портретом */
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 15;
+            }
 
             /* Кнопка "Контент" */
             .content-btn-container {
