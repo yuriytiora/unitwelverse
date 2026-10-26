@@ -44,7 +44,7 @@
             z-index: 1;
         }
 
-        /* Верхняя навигация */
+        /* Верхняя навигация (ПК) */
         .top-nav {
             display: flex;
             gap: 10px;
@@ -71,7 +71,8 @@
             backdrop-filter: blur(5px);
         }
         .ui-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        .ui-btn.active { background: var(--neon-glow); color: #000; font-weight: bold; }
+        /* Убрали синюю заливку для активной кнопки */
+        .ui-btn.active { background: rgba(0,0,0,0.6); color: var(--neon-glow); font-weight: bold; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
 
         /* Основная зона */
         .main-zone {
@@ -110,7 +111,6 @@
         }
         .data-block:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; }
-        /* Убираем белые тексты */
         .data-block span { display: none; }
 
         /* Портрет */
@@ -198,6 +198,36 @@
         .content-card h4 { margin: 0 0 5px 0; color: var(--neon-glow); }
         .content-card p { margin: 0; font-size: 13px; color: #cbd5e1; }
 
+        /* --- МОДАЛЬНОЕ ОКНО --- */
+        .info-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(5, 15, 25, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--neon-glow);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 100;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.3);
+        }
+        .info-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .info-modal img { max-width: 100px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--neon-glow); }
+        .info-modal h3 { color: var(--neon-glow); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .info-modal p { color: #e2e8f0; font-size: 14px; line-height: 1.5; }
+        .modal-close { position: absolute; top: 10px; right: 15px; background: transparent; border: none; color: var(--neon-glow); font-size: 20px; cursor: pointer; }
+
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
             body {
@@ -206,20 +236,21 @@
                 background-position: center;
             }
 
-            .cockpit {
-                padding: 10px;
-            }
+            .cockpit { padding: 10px; }
 
-            /* Верхнее меню */
-            .top-nav {
-                gap: 5px;
-                margin-bottom: 15px;
-            }
-            .ui-btn {
+            /* Верхнее меню (разъединяем) */
+            .top-nav { display: contents; } /* Убираем контейнер */
+            .nav-btn-top {
+                position: absolute;
                 padding: 6px 10px;
                 font-size: 10px;
                 min-width: 90px;
+                z-index: 15;
             }
+            /* Автономное положение верхних кнопок */
+            .nav-btn-top:nth-child(1) { top: 4%; left: 17%; transform: translateX(-50%); } /* BIG DATA */
+            .nav-btn-top:nth-child(2) { top: 6%; left: 50%; transform: translateX(-50%); } /* ЗВЕЗДЫ */
+            .nav-btn-top:nth-child(3) { top: 4%; left: 83; transform: translateX(-50%); } /* ПУЛЬТ */
 
             .main-zone {
                 flex-direction: column;
@@ -240,7 +271,7 @@
                 z-index: 10;
             }
 
-            /* Независимые кнопки */
+            /* Независимые нижние кнопки */
             .left-panel, .right-panel { display: contents; }
 
             .data-block {
@@ -267,64 +298,11 @@
 
             .bottom-panel { display: none; }
         }
-
-        /* --- МОДАЛЬНОЕ ОКНО (ИНФО-СВИТОК) --- */
-        .info-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: rgba(5, 15, 25, 0.95);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--neon-glow);
-            border-radius: 20px;
-            padding: 25px;
-            z-index: 100;
-            text-align: center;
-            width: 80%;
-            max-width: 400px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 50px rgba(0, 242, 254, 0.3);
-        }
-        .info-modal.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .info-modal img {
-            max-width: 100px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid var(--neon-glow);
-        }
-        .info-modal h3 {
-            color: var(--neon-glow);
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .info-modal p {
-            color: #e2e8f0;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: var(--neon-glow);
-            font-size: 20px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Модальное окно для информации -->
+    <!-- Модальное окно -->
     <div class="info-modal" id="info-modal">
         <button class="modal-close" onclick="closeModal()">✕</button>
         <div id="modal-content"></div>
@@ -356,7 +334,6 @@
     <script>
         const selectedComrade = localStorage.getItem('selectedComrade') || 'michael';
         
-        // База данных героев (добавлены поля для всплывающих окон)
         const database = {
             'michael': { 
                 name: 'Майкл', country: 'США', sphere: 'Киберсфера', 
@@ -404,12 +381,12 @@
             </div>
         `).join('');
 
-        // В HTML-разметке убираем белые тексты (span) и добавляем вызовы функций
+        // Изменяем классы для верхних кнопок, чтобы их можно было разъединить
         container.innerHTML = `
             <div class="top-nav">
-                <button class="ui-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
-                <button class="ui-btn active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
-                <button class="ui-btn" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
+                <button class="ui-btn nav-btn-top" onclick="window.location.href='bigdata.html'">BIG DATA</button>
+                <button class="ui-btn nav-btn-top active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
+                <button class="ui-btn nav-btn-top" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
             </div>
 
             <div class="main-zone">
@@ -456,7 +433,6 @@
             el.classList.toggle('open');
         }
 
-        // Функция для показа всплывающего окна с информацией
         function showInfo(type) {
             const modal = document.getElementById('info-modal');
             const content = document.getElementById('modal-content');
