@@ -283,23 +283,15 @@
                 transform: translateX(-50%);
             }
 
-            /* 5. Кнопка "КОНТЕНТ" (Центр, под портретом) */
+             /* 5. Кнопка "КОНТЕНТ" (Автономная) */
             .content-btn-container {
                 position: absolute;
-                top: 50%; /* Подберите высоту под портретом */
+                top: 55%; /* <-- ВОТ ЗДЕСЬ МЕНЯЙТЕ ВЫСОТУ */
                 left: 50%;
                 transform: translateX(-50%);
                 z-index: 15;
             }
-
-            /* Кнопка "Контент" */
-            .content-btn-container {
-                position: static;
-                transform: none;
-                order: 2;
-                margin: 10px 0;
-            }
-            .content-btn { padding: 6px 20px; font-size: 11px; }
+           .content-btn { padding: 10px 20px; font-size: 11px; }
 
             /* Скрываем титулы на мобильной версии */
             .bottom-panel {
