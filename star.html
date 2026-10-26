@@ -246,13 +246,13 @@
             .left-panel { order: 1; margin-bottom: 15px; }
             .right-panel { order: 3; margin-top: 15px; }
 
-            /* ДЕЛАЕМ КНОПКИ МАЛЕНЬКИМИ, КАК "КОНТЕНТ" */
+            /* ДЕЛАЕМ КНОПКИ ТАКИМИ ЖЕ, КАК "КОНТЕНТ" */
             .data-block {
                 flex: 0 0 auto;
-                width: 130px; /* Уменьшили ширину */
-                padding: 6px; /* Уменьшили отступы */
+                padding: 6px 10px; /* Такие же отступы, как у .ui-btn */
+                /* width: 130px; -- УБРАЛИ, чтобы ширина зависела от текста */
             }
-            .data-block span { font-size: 11px; }
+            .data-block span { font-size: 10px; }
             .data-block strong { font-size: 9px; margin-bottom: 0; }
 
             /* Кнопка "Контент" */
