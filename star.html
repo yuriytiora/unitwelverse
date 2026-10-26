@@ -10,7 +10,7 @@
             --neon-glow: #00f2fe; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            --panel-bg: rgba(10, 25, 35, 0.7);
+            --panel-bg: rgba(10, 25, 35, 0.5); /* Сделали панели более прозрачными */
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
@@ -56,7 +56,7 @@
         
         /* Единый стиль для всех кнопок */
         .ui-btn {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.5); /* 50% прозрачности */
             border: 1px solid var(--neon-glow);
             color: var(--neon-glow);
             padding: 8px 15px;
@@ -69,10 +69,16 @@
             min-width: 100px;
             text-align: center;
             backdrop-filter: blur(5px);
+            font-weight: normal; /* Убрали жирность */
         }
         .ui-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        /* Убрали синюю заливку для активной кнопки */
-        .ui-btn.active { background: rgba(0,0,0,0.6); color: var(--neon-glow); font-weight: bold; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
+        
+        /* Убрали жирность и заливку у активной кнопки */
+        .ui-btn.active { 
+            background: rgba(0,0,0,0.5); 
+            color: var(--neon-glow); 
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); 
+        }
 
         /* Основная зона */
         .main-zone {
@@ -110,7 +116,7 @@
             backdrop-filter: blur(10px);
         }
         .data-block:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; }
+        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; font-weight: normal; }
         .data-block span { display: none; }
 
         /* Портрет */
@@ -159,6 +165,7 @@
             font-size: 10px;
             text-transform: uppercase;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            font-weight: normal;
         }
 
         /* Свитки */
@@ -184,18 +191,18 @@
         .scroll-bottom.open { transform: translateY(0); }
 
         .scroll-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 10px; }
-        .scroll-title { color: var(--neon-glow); font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
+        .scroll-title { color: var(--neon-glow); font-size: 16px; text-transform: uppercase; letter-spacing: 2px; font-weight: normal; }
         .close-btn { background: transparent; border: 1px solid var(--neon-glow); color: var(--neon-glow); padding: 5px 10px; border-radius: 5px; cursor: pointer; }
         
         .comrade-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.2s; }
         .comrade-item:hover { background: rgba(0, 242, 254, 0.1); }
         .comrade-avatar { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--neon-glow); background: #000; object-fit: cover; }
         .comrade-info { display: flex; flex-direction: column; }
-        .comrade-name { font-weight: bold; font-size: 14px; }
+        .comrade-name { font-size: 14px; font-weight: normal; }
         .comrade-status { font-size: 11px; color: #a0aec0; }
 
         .content-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; }
-        .content-card h4 { margin: 0 0 5px 0; color: var(--neon-glow); }
+        .content-card h4 { margin: 0 0 5px 0; color: var(--neon-glow); font-weight: normal; }
         .content-card p { margin: 0; font-size: 13px; color: #cbd5e1; }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
@@ -224,7 +231,7 @@
             transform: translate(-50%, -50%) scale(1);
         }
         .info-modal img { max-width: 100px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--neon-glow); }
-        .info-modal h3 { color: var(--neon-glow); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .info-modal h3 { color: var(--neon-glow); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: normal; }
         .info-modal p { color: #e2e8f0; font-size: 14px; line-height: 1.5; }
         .modal-close { position: absolute; top: 10px; right: 15px; background: transparent; border: none; color: var(--neon-glow); font-size: 20px; cursor: pointer; }
 
@@ -238,8 +245,7 @@
 
             .cockpit { padding: 10px; }
 
-            /* Верхнее меню (разъединяем) */
-            .top-nav { display: contents; } /* Убираем контейнер */
+            .top-nav { display: contents; } 
             .nav-btn-top {
                 position: absolute;
                 padding: 6px 10px;
@@ -247,10 +253,9 @@
                 min-width: 90px;
                 z-index: 15;
             }
-            /* Автономное положение верхних кнопок */
-            .nav-btn-top:nth-child(1) { top: 3%; left: 31%; transform: translateX(-50%); } /* BIG DATA */
-            .nav-btn-top:nth-child(2) { top: 7%; left: 50%; transform: translateX(-50%); } /* ЗВЕЗДЫ */
-            .nav-btn-top:nth-child(3) { top: 3%; left: 69%; transform: translateX(-50%); } /* ПУЛЬТ */
+            .nav-btn-top:nth-child(1) { top: 3%; left: 31%; transform: translateX(-50%); } 
+            .nav-btn-top:nth-child(2) { top: 7%; left: 50%; transform: translateX(-50%); } 
+            .nav-btn-top:nth-child(3) { top: 3%; left: 69%; transform: translateX(-50%); } 
 
             .main-zone {
                 flex-direction: column;
@@ -259,7 +264,6 @@
                 height: 100%;
             }
 
-            /* Портрет */
             .center-portrait {
                 position: absolute;
                 top: 45%; 
@@ -271,7 +275,6 @@
                 z-index: 10;
             }
 
-            /* Независимые нижние кнопки */
             .left-panel, .right-panel { display: contents; }
 
             .data-block {
@@ -279,13 +282,12 @@
                 padding: 6px 10px;
                 z-index: 15;
             }
-            .data-block strong { font-size: 10px; margin-bottom: 0; }
+            .data-block strong { font-size: 10px; margin-bottom: 0; font-weight: normal; }
 
-            /* Положение кнопок (настраивайте под себя) */
-            .left-panel .data-block:nth-child(1) { top: 87%; left: 34%; transform: translateX(-50%); } /* Страна */
-            .left-panel .data-block:nth-child(2) { top: 87%; left: 66%; transform: translateX(-50%); } /* Сфера */
-            .right-panel .data-block:nth-child(1) { top: 12%; left: 50%; transform: translateX(-50%); }  /* Проект */
-            .right-panel .data-block:nth-child(2) { top: 83%; left: 50%; transform: translateX(-50%); } /* Контакт */
+            .left-panel .data-block:nth-child(1) { top: 87%; left: 34%; transform: translateX(-50%); } 
+            .left-panel .data-block:nth-child(2) { top: 87%; left: 66%; transform: translateX(-50%); } 
+            .right-panel .data-block:nth-child(1) { top: 12%; left: 50%; transform: translateX(-50%); }  
+            .right-panel .data-block:nth-child(2) { top: 83%; left: 50%; transform: translateX(-50%); } 
 
             .content-btn-container {
                 position: absolute;
@@ -381,7 +383,6 @@
             </div>
         `).join('');
 
-        // Изменяем классы для верхних кнопок, чтобы их можно было разъединить
         container.innerHTML = `
             <div class="top-nav">
                 <button class="ui-btn nav-btn-top" onclick="window.location.href='bigdata.html'">BIG DATA</button>
