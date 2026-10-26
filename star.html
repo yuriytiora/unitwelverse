@@ -10,15 +10,14 @@
             --neon-glow: #00f2fe; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            --panel-bg: rgba(10, 25, 35, 0.85);
-            --glass-bg: rgba(5, 10, 20, 0.9);
+            --panel-bg: rgba(10, 25, 35, 0.7);
         }
         * { box-sizing: border-box; }
         html, body { 
             margin: 0; 
             padding: 0; 
             height: 100%; 
-            overflow: hidden; /* Запрет прокрутки */
+            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-space); 
             color: var(--text-main); 
@@ -32,7 +31,6 @@
             background-attachment: fixed;
         }
 
-        /* Главный контейнер (Рубка) */
         .cockpit {
             position: relative;
             width: 100%;
@@ -41,7 +39,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             z-index: 1;
         }
 
@@ -50,11 +48,13 @@
             display: flex;
             gap: 10px;
             z-index: 10;
-            width: 100%;
             justify-content: center;
             flex-wrap: wrap;
+            width: 100%;
         }
-        .nav-btn {
+        
+        /* Единый стиль для всех кнопок */
+        .ui-btn {
             background: rgba(0,0,0,0.6);
             border: 1px solid var(--neon-glow);
             color: var(--neon-glow);
@@ -69,10 +69,10 @@
             text-align: center;
             backdrop-filter: blur(5px);
         }
-        .nav-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        .nav-btn.active { background: var(--neon-glow); color: #000; font-weight: bold; }
+        .ui-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
+        .ui-btn.active { background: var(--neon-glow); color: #000; font-weight: bold; }
 
-        /* Основная зона (ПК: портрет в центре, панели по бокам) */
+        /* Основная зона */
         .main-zone {
             flex-grow: 1;
             display: flex;
@@ -83,6 +83,7 @@
             max-width: 1400px;
         }
 
+        /* Панели данных (ПК) */
         .left-panel, .right-panel {
             position: absolute;
             top: 50%;
@@ -91,7 +92,7 @@
             flex-direction: column;
             gap: 15px;
             z-index: 5;
-            width: 220px;
+            width: 200px;
         }
         .left-panel { left: 20px; }
         .right-panel { right: 20px; }
@@ -99,17 +100,18 @@
         .data-block {
             background: var(--panel-bg);
             border: 1px solid var(--neon-glow);
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 20px;
+            padding: 8px 10px;
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
             backdrop-filter: blur(10px);
         }
-        .data-block:hover { background: rgba(0, 242, 254, 0.1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
-        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .data-block span { font-size: 14px; color: #fff; font-weight: bold; }
+        .data-block:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
+        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+        .data-block span { font-size: 12px; color: #fff; font-weight: bold; }
 
+        /* Портрет */
         .center-portrait {
             position: relative;
             z-index: 5;
@@ -126,29 +128,14 @@
         }
         .center-portrait img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Кнопка "Контент" */
+        /* Кнопка "Контент" на ПК */
         .content-btn-container {
             position: absolute;
-            bottom: 100px;
+            bottom: 50px; /* Опущена ниже портрета */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
         }
-        .content-btn {
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--neon-glow);
-            color: var(--neon-glow);
-            padding: 10px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-        }
-        .content-btn:hover { background: var(--neon-glow); color: #000; box-shadow: 0 0 30px var(--neon-glow); }
 
         /* Нижняя панель (Титулы) */
         .bottom-panel {
@@ -158,7 +145,7 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            padding-bottom: 20px;
+            padding-bottom: 10px;
         }
         .titles-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .title-badge {
@@ -211,79 +198,96 @@
 
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
-            /* Меняем фон на вертикальный */
+            /* ВПИСЫВАЕМ ВЕСЬ ФОН В ЭКРАН */
             body {
                 background-image: url('cockpit1.webp');
+                background-size: contain; /* Картинка вписывается целиком */
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: #000; /* Черный фон, если останутся поля */
             }
 
             .cockpit {
                 padding: 10px;
-                justify-content: flex-start;
+                justify-content: space-between;
             }
+
+            /* Скрываем верхнюю навигацию (она дублируется, используем кнопки сверху) */
+            .top-nav { display: none; } 
 
             .main-zone {
                 flex-direction: column;
                 justify-content: space-between;
                 height: 100%;
-                padding-top: 10px;
+                width: 100%;
             }
 
-            /* Панели данных становятся горизонтальными и распределяются вокруг портрета */
+            /* Верхний ряд кнопок (Страна, Сфера) */
             .left-panel {
                 position: static;
                 transform: none;
                 flex-direction: row;
                 width: 100%;
                 justify-content: center;
-                gap: 15px;
-                margin-bottom: 10px;
-                order: 1; /* Сверху */
+                gap: 10px;
+                margin-bottom: 5px;
+                order: 1;
             }
+
+            /* Нижний ряд кнопок (Проект, Контакт) */
             .right-panel {
                 position: static;
                 transform: none;
                 flex-direction: row;
                 width: 100%;
                 justify-content: center;
-                gap: 15px;
-                margin-top: auto; /* Прижимаем вниз */
-                margin-bottom: 10px;
-                order: 4; /* В самом низу */
+                gap: 10px;
+                margin-top: 5px;
+                order: 4;
             }
+
             .data-block {
                 flex: 1;
-                padding: 8px;
+                max-width: 150px;
             }
-            .data-block span { font-size: 12px; }
+            .data-block span { font-size: 11px; }
 
             .center-portrait {
                 width: 200px;
                 height: 200px;
                 margin: 10px 0;
-                order: 2; /* По центру */
+                order: 2;
+                position: absolute; /* Центрируем абсолютно */
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
             .content-btn-container {
-                position: static;
-                transform: none;
-                margin: 10px 0;
-                order: 3; /* Под портретом */
+                position: absolute;
+                bottom: 80px; /* Отступ от нижних кнопок */
+                left: 50%;
+                transform: translateX(-50%);
+                order: 3;
             }
+            
             .content-btn { padding: 8px 20px; font-size: 12px; }
 
             .bottom-panel {
-                padding-bottom: 0;
-                margin-top: 0;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                padding-bottom: 10px;
+                z-index: 10;
             }
             
-            .nav-btn { font-size: 10px; min-width: 80px; padding: 6px 8px; }
-            .scroll-panel { height: 70vh; }
+            .titles-grid { display: none; } /* Скрываем титулы, чтобы не мешали */
         }
     </style>
 </head>
 <body>
 
-    <!-- Верхний свиток (Соратники) -->
+    <!-- Верхний свиток -->
     <div class="scroll-panel scroll-top" id="scroll-comrades">
         <div class="scroll-header">
             <div class="scroll-title">Звезды (Соратники)</div>
@@ -292,32 +296,21 @@
         <div id="comrades-list"></div>
     </div>
 
-    <!-- Нижний свиток (Контент) -->
+    <!-- Нижний свиток -->
     <div class="scroll-panel scroll-bottom" id="scroll-content">
         <div class="scroll-header">
             <div class="scroll-title">Контент (Лента)</div>
             <button class="close-btn" onclick="toggleScroll('scroll-content')">✕</button>
         </div>
         <div>
-            <div class="content-card">
-                <h4>📺 Видео: Интро проекта</h4>
-                <p>Короткий ролик о том, как родилась идея ИИ-бота для киберзащиты.</p>
-            </div>
-            <div class="content-card">
-                <h4>💬 Диалог с ИИ-Навигатором</h4>
-                <p>Обсуждение этических аспектов проекта. Аудит по 12 Спутникам.</p>
-            </div>
-            <div class="content-card">
-                <h4>📰 Новость от соратника</h4>
-                <p>Владимир (Геосфера) опубликовал новые данные о мерзлоте.</p>
-            </div>
+            <div class="content-card"><h4>📺 Видео: Интро</h4><p>Короткий ролик о рождении идеи.</p></div>
+            <div class="content-card"><h4>💬 Диалог с ИИ</h4><p>Аудит по 12 Спутникам.</p></div>
+            <div class="content-card"><h4>📰 Новость</h4><p>Владимир опубликовал данные о мерзлоте.</p></div>
         </div>
     </div>
 
     <!-- Главный контейнер -->
-    <div class="cockpit" id="profile-container">
-        <!-- Данные вставляются через JS -->
-    </div>
+    <div class="cockpit" id="profile-container"></div>
 
     <script>
         const selectedComrade = localStorage.getItem('selectedComrade') || 'michael';
@@ -341,24 +334,22 @@
         const comradesHTML = otherComrades.map(c => `
             <div class="comrade-item" onclick="alert('Переход в профиль ${c.name} (в разработке)')">
                 <img src="${c.img}" class="comrade-avatar" onerror="this.src='https://yuriytiora.github.io/unitwelve/be3.webp'">
-                <div class="comrade-info">
-                    <div class="comrade-name">${c.name}</div>
-                    <div class="comrade-status">${c.status}</div>
-                </div>
+                <div class="comrade-info"><div class="comrade-name">${c.name}</div><div class="comrade-status">${c.status}</div></div>
             </div>
         `).join('');
 
         container.innerHTML = `
             <!-- Верхняя навигация -->
             <div class="top-nav">
-                <button class="nav-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
-                <button class="nav-btn active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
-                <button class="nav-btn" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
+                <button class="ui-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
+                <button class="ui-btn active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
+                <button class="ui-btn" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
             </div>
 
             <!-- Основная зона -->
             <div class="main-zone">
-                <!-- Левая панель (Внешние данные) -->
+                
+                <!-- Левая панель (Страна, Сфера) -->
                 <div class="left-panel">
                     <div class="data-block">
                         <strong>Страна</strong>
@@ -377,10 +368,10 @@
 
                 <!-- Кнопка "Контент" -->
                 <div class="content-btn-container">
-                    <button class="content-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
+                    <button class="ui-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
                 </div>
 
-                <!-- Правая панель (Личные данные) -->
+                <!-- Правая панель (Проект, Контакт) -->
                 <div class="right-panel">
                     <div class="data-block">
                         <strong>Проект</strong>
