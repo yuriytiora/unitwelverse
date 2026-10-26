@@ -10,7 +10,7 @@
             --neon-glow: #00f2fe; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            --panel-bg: rgba(10, 25, 35, 0.5); /* Сделали панели более прозрачными */
+            --panel-bg: rgba(10, 25, 35, 0.3); /* Еще больше прозрачности для панелей */
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
@@ -56,7 +56,7 @@
         
         /* Единый стиль для всех кнопок */
         .ui-btn {
-            background: rgba(0,0,0,0.5); /* 50% прозрачности */
+            background: rgba(0,0,0,0.3); /* Прозрачность 30%, без блюра */
             border: 1px solid var(--neon-glow);
             color: var(--neon-glow);
             padding: 8px 15px;
@@ -68,14 +68,12 @@
             transition: 0.3s;
             min-width: 100px;
             text-align: center;
-            backdrop-filter: blur(5px);
-            font-weight: normal; /* Убрали жирность */
+            font-weight: normal; 
         }
         .ui-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         
-        /* Убрали жирность и заливку у активной кнопки */
         .ui-btn.active { 
-            background: rgba(0,0,0,0.5); 
+            background: rgba(0,0,0,0.3); 
             color: var(--neon-glow); 
             box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); 
         }
@@ -113,7 +111,6 @@
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
-            backdrop-filter: blur(10px);
         }
         .data-block:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; font-weight: normal; }
