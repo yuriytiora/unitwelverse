@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -14,23 +14,26 @@
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
+        html { scroll-behavior: smooth; }
         body { 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-space); 
             color: var(--text-main); 
-            /* ИСПОЛЬЗУЕМ WEBP ДЛЯ ФОНА */
             background-image: url('cockpit.webp'); 
             background-size: cover; 
             background-position: center;
             background-attachment: fixed;
+            overflow-x: hidden;
         }
 
         /* Главный контейнер (Рубка) */
         .cockpit {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -47,9 +50,10 @@
             width: 100%;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         .nav-btn {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             border: 1px solid var(--neon-glow);
             color: var(--neon-glow);
             padding: 8px 15px;
@@ -59,7 +63,7 @@
             font-size: 11px;
             letter-spacing: 1px;
             transition: 0.3s;
-            min-width: 120px;
+            min-width: 100px;
             text-align: center;
             backdrop-filter: blur(5px);
         }
@@ -70,19 +74,52 @@
         .main-zone {
             flex-grow: 1;
             display: flex;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
             position: relative;
             width: 100%;
             max-width: 1400px;
+            margin-bottom: 20px;
         }
+
+        /* Левая панель */
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 220px;
+            margin-right: auto;
+        }
+        /* Правая панель */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 220px;
+            margin-left: auto;
+        }
+
+        .data-block {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-glow);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .data-block:hover { background: rgba(0, 242, 254, 0.1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
+        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .data-block span { font-size: 14px; color: #fff; font-weight: bold; }
 
         /* Портрет в центре */
         .center-portrait {
             position: relative;
             z-index: 5;
-            width: 320px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             border: 4px solid var(--neon-glow);
             box-shadow: 0 0 60px rgba(0, 242, 254, 0.5), inset 0 0 30px rgba(0,0,0,0.8);
@@ -94,10 +131,10 @@
         }
         .center-portrait img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Контейнер для кнопки "Контент" (под портретом) */
+        /* Контейнер для кнопки "Контент" */
         .bottom-center-zone {
             position: absolute;
-            bottom: 80px; /* Подняли выше, чтобы не перекрывать титулы */
+            bottom: -50px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -119,34 +156,6 @@
         }
         .content-btn:hover { background: var(--neon-glow); color: #000; box-shadow: 0 0 30px var(--neon-glow); }
 
-        /* Боковые панели */
-        .side-panel {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 5;
-            width: 200px;
-        }
-        .left-panel { left: 20px; }
-        .right-panel { right: 20px; }
-
-        .data-block {
-            background: var(--panel-bg);
-            border: 1px solid var(--neon-glow);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
-        }
-        .data-block:hover { background: rgba(0, 242, 254, 0.1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
-        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .data-block span { font-size: 14px; color: #fff; font-weight: bold; }
-
         /* Нижняя панель (Титулы) */
         .bottom-panel {
             width: 100%;
@@ -155,7 +164,7 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            padding-bottom: 10px;
+            padding-bottom: 20px;
         }
         .titles-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .title-badge {
@@ -169,7 +178,7 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
-        /* Свитки (без изменений) */
+        /* Свитки */
         .scroll-panel {
             position: fixed;
             left: 0;
@@ -206,22 +215,51 @@
         .content-card h4 { margin: 0 0 5px 0; color: var(--neon-glow); }
         .content-card p { margin: 0; font-size: 13px; color: #cbd5e1; }
 
-        /* Адаптивность */
+        /* Адаптивность для ПК */
         @media (min-width: 1025px) {
-            .side-panel { width: 250px; }
             .center-portrait { width: 400px; height: 400px; }
             .scroll-top, .scroll-bottom { width: 50%; left: 25%; border-radius: 20px; }
-            .bottom-center-zone { bottom: 100px; }
         }
 
+        /* Адаптивность для СМАРТФОНОВ */
         @media (max-width: 1024px) {
-            .main-zone { flex-direction: column; }
-            .side-panel { position: relative; top: 0; transform: none; width: 100%; flex-direction: row; justify-content: space-between; padding: 10px 0; }
-            .center-portrait { width: 220px; height: 220px; margin: 10px 0; }
-            .nav-btn { font-size: 10px; min-width: 90px; padding: 6px 10px; }
-            .scroll-panel { height: 75vh; }
-            .bottom-center-zone { bottom: 60px; }
-            .content-btn { font-size: 12px; padding: 8px 20px; }
+            .cockpit {
+                padding: 10px;
+                justify-content: flex-start;
+                padding-bottom: 30px; /* Отступ снизу, чтобы кнопка "Вернуться" не прилипала */
+            }
+            .main-zone {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 0;
+            }
+            /* Панели данных идут в ряд */
+            .left-panel, .right-panel {
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-between;
+                margin: 0;
+                gap: 10px;
+            }
+            .data-block { flex: 1; padding: 8px; }
+            .data-block span { font-size: 12px; }
+            
+            .center-portrait { width: 180px; height: 180px; margin: 10px 0; order: -1; } /* Портрет поднимаем выше */
+            
+            /* Кнопка "Контент" становится статичной под портретом */
+            .bottom-center-zone {
+                position: static;
+                transform: none;
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            .content-btn { width: 80%; padding: 10px 0; }
+
+            .nav-btn { font-size: 10px; min-width: 80px; padding: 6px 8px; }
+            .scroll-panel { height: 80vh; }
+            
+            .bottom-panel { padding-top: 20px; padding-bottom: 20px; }
         }
     </style>
 </head>
@@ -302,9 +340,8 @@
 
             <!-- Основная зона -->
             <div class="main-zone">
-                
                 <!-- Левая панель (Внешние данные) -->
-                <div class="side-panel left-panel">
+                <div class="left-panel">
                     <div class="data-block">
                         <strong>Страна</strong>
                         <span>${data.country}</span>
@@ -321,7 +358,7 @@
                 </div>
 
                 <!-- Правая панель (Личные данные) -->
-                <div class="side-panel right-panel">
+                <div class="right-panel">
                     <div class="data-block">
                         <strong>Проект</strong>
                         <span>${data.project}</span>
@@ -333,7 +370,7 @@
                 </div>
             </div>
 
-            <!-- Кнопка "Контент" под портретом -->
+            <!-- Кнопка "Контент" -->
             <div class="bottom-center-zone">
                 <button class="content-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
             </div>
@@ -341,7 +378,7 @@
             <!-- Нижняя панель (Титулы) -->
             <div class="bottom-panel">
                 <div class="titles-grid">${titlesHTML}</div>
-                <a href="comrades.html" style="color:#64748b; font-size:11px; text-decoration:none;">← Вернуться к Соратникам</a>
+                <a href="comrades.html" style="color:#64748b; font-size:11px; text-decoration:none; margin-top:15px; display:inline-block;">← Вернуться к Соратникам</a>
             </div>
         `;
 
