@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UNITWELVERSE // Ядро Звезды</title>
+    <style>
+        :root { 
+            --bg-space: #05060f; 
+            --neon-glow: #00f2fe; 
+            --text-main: #ffffff; 
+            --accent-gold: #ffd700; 
+            --panel-bg: rgba(10, 25, 35, 0.85);
+            --glass-bg: rgba(5, 10, 20, 0.9);
+        }
+        * { box-sizing: border-box; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background-color: var(--bg-space); 
+            color: var(--text-main); 
+            /* ИСПОЛЬЗУЕМ WEBP ДЛЯ ФОНА */
+            background-image: url('STARPAGE4.webp'); 
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Главный контейнер (Рубка) */
+        .cockpit {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            z-index: 1;
+        }
+
+        /* Верхняя навигация */
+        .top-nav {
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--neon-glow);
+            color: var(--neon-glow);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            min-width: 120px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover { background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
+        .nav-btn.active { background: var(--neon-glow); color: #000; font-weight: bold; }
+
+        /* Основная зона */
+        .main-zone {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* Портрет в центре */
+        .center-portrait {
+            position: relative;
+            z-index: 5;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 4px solid var(--neon-glow);
+            box-shadow: 0 0 60px rgba(0, 242, 254, 0.5), inset 0 0 30px rgba(0,0,0,0.8);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .center-portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Контейнер для кнопки "Контент" (под портретом) */
+        .bottom-center-zone {
+            position: absolute;
+            bottom: 80px; /* Подняли выше, чтобы не перекрывать титулы */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+        }
+        .content-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--neon-glow);
+            color: var(--neon-glow);
+            padding: 10px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+        .content-btn:hover { background: var(--neon-glow); color: #000; box-shadow: 0 0 30px var(--neon-glow); }
+
+        /* Боковые панели */
+        .side-panel {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 5;
+            width: 200px;
+        }
+        .left-panel { left: 20px; }
+        .right-panel { right: 20px; }
+
+        .data-block {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-glow);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .data-block:hover { background: rgba(0, 242, 254, 0.1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
+        .data-block strong { display: block; font-size: 10px; color: var(--neon-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .data-block span { font-size: 14px; color: #fff; font-weight: bold; }
+
+        /* Нижняя панель (Титулы) */
+        .bottom-panel {
+            width: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+        .titles-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .title-badge {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Свитки (без изменений) */
+        .scroll-panel {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 65vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .scroll-top { top: 0; transform: translateY(-100%); border-bottom: 2px solid var(--neon-glow); border-radius: 0 0 20px 20px; }
+        .scroll-top.open { transform: translateY(0); }
+        .scroll-bottom { bottom: 0; transform: translateY(100%); border-top: 2px solid var(--neon-glow); border-radius: 20px 20px 0 0; }
+        .scroll-bottom.open { transform: translateY(0); }
+
+        .scroll-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 10px; }
+        .scroll-title { color: var(--neon-glow); font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
+        .close-btn { background: transparent; border: 1px solid var(--neon-glow); color: var(--neon-glow); padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        
+        .comrade-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.2s; }
+        .comrade-item:hover { background: rgba(0, 242, 254, 0.1); }
+        .comrade-avatar { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--neon-glow); background: #000; object-fit: cover; }
+        .comrade-info { display: flex; flex-direction: column; }
+        .comrade-name { font-weight: bold; font-size: 14px; }
+        .comrade-status { font-size: 11px; color: #a0aec0; }
+
+        .content-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; }
+        .content-card h4 { margin: 0 0 5px 0; color: var(--neon-glow); }
+        .content-card p { margin: 0; font-size: 13px; color: #cbd5e1; }
+
+        /* Адаптивность */
+        @media (min-width: 1025px) {
+            .side-panel { width: 250px; }
+            .center-portrait { width: 400px; height: 400px; }
+            .scroll-top, .scroll-bottom { width: 50%; left: 25%; border-radius: 20px; }
+            .bottom-center-zone { bottom: 100px; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-zone { flex-direction: column; }
+            .side-panel { position: relative; top: 0; transform: none; width: 100%; flex-direction: row; justify-content: space-between; padding: 10px 0; }
+            .center-portrait { width: 220px; height: 220px; margin: 10px 0; }
+            .nav-btn { font-size: 10px; min-width: 90px; padding: 6px 10px; }
+            .scroll-panel { height: 75vh; }
+            .bottom-center-zone { bottom: 60px; }
+            .content-btn { font-size: 12px; padding: 8px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Верхний свиток (Соратники) -->
+    <div class="scroll-panel scroll-top" id="scroll-comrades">
+        <div class="scroll-header">
+            <div class="scroll-title">Звезды (Соратники)</div>
+            <button class="close-btn" onclick="toggleScroll('scroll-comrades')">✕</button>
+        </div>
+        <div id="comrades-list"></div>
+    </div>
+
+    <!-- Нижний свиток (Контент) -->
+    <div class="scroll-panel scroll-bottom" id="scroll-content">
+        <div class="scroll-header">
+            <div class="scroll-title">Контент (Лента)</div>
+            <button class="close-btn" onclick="toggleScroll('scroll-content')">✕</button>
+        </div>
+        <div>
+            <div class="content-card">
+                <h4>📺 Видео: Интро проекта</h4>
+                <p>Короткий ролик о том, как родилась идея ИИ-бота для киберзащиты.</p>
+            </div>
+            <div class="content-card">
+                <h4>💬 Диалог с ИИ-Навигатором</h4>
+                <p>Обсуждение этических аспектов проекта. Аудит по 12 Спутникам.</p>
+            </div>
+            <div class="content-card">
+                <h4>📰 Новость от соратника</h4>
+                <p>Владимир (Геосфера) опубликовал новые данные о мерзлоте.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главный контейнер -->
+    <div class="cockpit" id="profile-container">
+        <!-- Данные вставляются через JS -->
+    </div>
+
+    <script>
+        const selectedComrade = localStorage.getItem('selectedComrade') || 'michael';
+        
+        const database = {
+            'michael': { name: 'Майкл', country: 'США', sphere: 'Киберсфера', project: 'ИИ-бот для киберзащиты', image: 'michael.jpg', titles: ['Звезда Инициативы', 'Чемпион Исследований'] },
+            'vladimir': { name: 'Владимир', country: 'Россия', sphere: 'Геосфера', project: 'Станции мониторинга мерзлоты', image: 'birch.jpg', titles: ['Звезда Инициативы', 'Фронтмен Возрождения'] },
+            'dilnoza': { name: 'Дильноза', country: 'Узбекистан', sphere: 'Образование', project: 'Платформа наставничества', image: 'bee.jpg', titles: ['Звезда Инициативы', 'Гуру Коллаборации'] }
+        };
+        const data = database[selectedComrade] || database['michael'];
+        const container = document.getElementById('profile-container');
+
+        const titlesHTML = data.titles.map(t => `<div class="title-badge">${t}</div>`).join('');
+
+        const comrades = [
+            { id: 'vladimir', name: 'Владимир', status: 'Геосфера', img: 'birch.jpg' },
+            { id: 'dilnoza', name: 'Дильноза', status: 'Образование', img: 'bee.jpg' }
+        ];
+        const otherComrades = comrades.filter(c => c.id !== selectedComrade);
+        
+        const comradesHTML = otherComrades.map(c => `
+            <div class="comrade-item" onclick="alert('Переход в профиль ${c.name} (в разработке)')">
+                <img src="${c.img}" class="comrade-avatar" onerror="this.src='https://yuriytiora.github.io/unitwelve/be3.webp'">
+                <div class="comrade-info">
+                    <div class="comrade-name">${c.name}</div>
+                    <div class="comrade-status">${c.status}</div>
+                </div>
+            </div>
+        `).join('');
+
+        container.innerHTML = `
+            <!-- Верхняя навигация -->
+            <div class="top-nav">
+                <button class="nav-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
+                <button class="nav-btn active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
+                <button class="nav-btn" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
+            </div>
+
+            <!-- Основная зона -->
+            <div class="main-zone">
+                
+                <!-- Левая панель (Внешние данные) -->
+                <div class="side-panel left-panel">
+                    <div class="data-block">
+                        <strong>Страна</strong>
+                        <span>${data.country}</span>
+                    </div>
+                    <div class="data-block">
+                        <strong>Сфера</strong>
+                        <span>${data.sphere}</span>
+                    </div>
+                </div>
+
+                <!-- Центральный портрет -->
+                <div class="center-portrait">
+                    <img src="${data.image}" alt="Портрет" onerror="this.src='https://yuriytiora.github.io/unitwelve/be3.webp'">
+                </div>
+
+                <!-- Правая панель (Личные данные) -->
+                <div class="side-panel right-panel">
+                    <div class="data-block">
+                        <strong>Проект</strong>
+                        <span>${data.project}</span>
+                    </div>
+                    <div class="data-block" onclick="alert('Запрос на контакт отправлен ${data.name}!')">
+                        <strong>Контакт</strong>
+                        <span>Связаться</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка "Контент" под портретом -->
+            <div class="bottom-center-zone">
+                <button class="content-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
+            </div>
+
+            <!-- Нижняя панель (Титулы) -->
+            <div class="bottom-panel">
+                <div class="titles-grid">${titlesHTML}</div>
+                <a href="comrades.html" style="color:#64748b; font-size:11px; text-decoration:none;">← Вернуться к Соратникам</a>
+            </div>
+        `;
+
+        document.getElementById('comrades-list').innerHTML = comradesHTML;
+
+        function toggleScroll(id) {
+            const el = document.getElementById(id);
+            document.querySelectorAll('.scroll-panel').forEach(panel => {
+                if (panel.id !== id) panel.classList.remove('open');
+            });
+            el.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
