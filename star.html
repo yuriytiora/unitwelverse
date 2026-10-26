@@ -208,63 +208,52 @@
                 padding: 10px;
             }
 
-            /* Верхнее меню оставляем, но делаем его компактным */
+            /* Верхнее меню */
             .top-nav {
                 gap: 5px;
-                margin-bottom: 5px;
+                margin-bottom: 15px;
             }
             .ui-btn {
                 padding: 6px 10px;
-                font-size: 9px;
-                min-width: 80px;
+                font-size: 10px;
+                min-width: 90px;
             }
 
             .main-zone {
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 10px;
+                padding-top: 0;
+                height: 100%;
             }
 
             /* Портрет */
             .center-portrait {
                 width: 180px;
                 height: 180px;
-                margin-top: 10px;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
 
-            /* Верхний ряд кнопок (Страна, Сфера) */
-            .left-panel {
+            /* Ряды кнопок */
+            .left-panel, .right-panel {
                 position: static;
                 flex-direction: row;
                 width: 100%;
                 justify-content: center;
-                gap: 10px;
+                gap: 15px;
                 transform: none;
-                order: 1;
-                margin-bottom: 10px;
             }
+            
+            .left-panel { order: 1; margin-bottom: 15px; }
+            .right-panel { order: 3; margin-top: 15px; }
 
-            /* Нижний ряд кнопок (Проект, Контакт) */
-            .right-panel {
-                position: static;
-                flex-direction: row;
-                width: 100%;
-                justify-content: center;
-                gap: 10px;
-                transform: none;
-                order: 3;
-                margin-top: 15px;
-            }
-
-            /* Кнопки данных */
+            /* ДЕЛАЕМ КНОПКИ МАЛЕНЬКИМИ, КАК "КОНТЕНТ" */
             .data-block {
                 flex: 0 0 auto;
-                width: 140px;
-                padding: 6px;
+                width: 130px; /* Уменьшили ширину */
+                padding: 6px; /* Уменьшили отступы */
             }
             .data-block span { font-size: 11px; }
-            .data-block strong { font-size: 9px; }
+            .data-block strong { font-size: 9px; margin-bottom: 0; }
 
             /* Кнопка "Контент" */
             .content-btn-container {
@@ -273,7 +262,7 @@
                 order: 2;
                 margin: 10px 0;
             }
-            .content-btn { padding: 8px 20px; font-size: 12px; }
+            .content-btn { padding: 6px 20px; font-size: 11px; }
 
             /* Скрываем титулы на мобильной версии */
             .bottom-panel {
