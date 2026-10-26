@@ -198,10 +198,9 @@
 
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
-            /* Меняем фон на ВАШУ НОВУЮ КАРТИНКУ (более квадратную) */
             body {
                 background-image: url('cockpit1.webp');
-                background-size: cover; /* Заполняет весь экран */
+                background-size: cover;
                 background-position: center;
             }
 
@@ -209,24 +208,24 @@
                 padding: 10px;
             }
 
-            /* Скрываем верхнее меню, используем кнопки на фоне */
+            /* Скрываем верхнее меню */
             .top-nav { display: none; } 
 
             /* Портрет строго по центру */
             .center-portrait {
                 position: absolute;
-                top: 50%;
+                top: 45%; /* Чуть выше центра, чтобы было место для нижних кнопок */
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 220px;
-                height: 220px;
+                width: 200px;
+                height: 200px;
                 margin: 0;
             }
 
             /* Верхний ряд кнопок (Страна, Сфера) */
             .left-panel {
                 position: absolute;
-                top: 10px;
+                top: 20px;
                 left: 0;
                 width: 100%;
                 flex-direction: row;
@@ -238,7 +237,7 @@
             /* Нижний ряд кнопок (Проект, Контакт) */
             .right-panel {
                 position: absolute;
-                bottom: 50px; /* Чуть выше края */
+                bottom: 60px; 
                 left: 0;
                 width: 100%;
                 flex-direction: row;
@@ -247,25 +246,26 @@
                 transform: none;
             }
 
+            /* Задаем кнопкам фиксированный размер, чтобы они не растягивались */
             .data-block {
-                flex: 1;
-                max-width: 160px;
-                padding: 6px 8px;
+                flex: 0 0 auto; /* Запрет на растягивание */
+                width: 140px; /* Фиксированная ширина */
+                padding: 8px;
             }
-            .data-block span { font-size: 11px; }
+            .data-block span { font-size: 12px; }
 
             /* Кнопка "Контент" */
             .content-btn-container {
                 position: absolute;
-                bottom: 120px; /* Между портретом и нижними кнопками */
+                bottom: 140px; /* Над кнопками Проект и Контакт */
                 left: 50%;
                 transform: translateX(-50%);
             }
             .content-btn { padding: 8px 20px; font-size: 12px; }
 
-            /* Скрываем титулы, чтобы не перекрывали фон (или оставляем, но аккуратно) */
+            /* Скрываем титулы на мобильной версии */
             .bottom-panel {
-                display: none; /* Временно скрываем, чтобы не мешали */
+                display: none;
             }
         }
     </style>
