@@ -23,7 +23,7 @@
             color: var(--text-main); 
         }
 
-        /* --- ФОН ДЛЯ ПК --- */
+        /* --- ФОН (ПК) --- */
         body { 
             background-image: url('cockpit.webp'); 
             background-size: cover; 
@@ -131,7 +131,7 @@
         /* Кнопка "Контент" на ПК */
         .content-btn-container {
             position: absolute;
-            bottom: 50px; /* Опущена ниже портрета */
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -198,96 +198,81 @@
 
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
-            /* ВПИСЫВАЕМ ВЕСЬ ФОН В ЭКРАН */
+            /* Меняем фон на ВАШУ НОВУЮ КАРТИНКУ (более квадратную) */
             body {
                 background-image: url('cockpit1.webp');
-                background-size: contain; /* Картинка вписывается целиком */
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-color: #000; /* Черный фон, если останутся поля */
+                background-size: cover; /* Заполняет весь экран */
+                background-position: center;
             }
 
             .cockpit {
                 padding: 10px;
-                justify-content: space-between;
             }
 
-            /* Скрываем верхнюю навигацию (она дублируется, используем кнопки сверху) */
+            /* Скрываем верхнее меню, используем кнопки на фоне */
             .top-nav { display: none; } 
 
-            .main-zone {
-                flex-direction: column;
-                justify-content: space-between;
-                height: 100%;
-                width: 100%;
+            /* Портрет строго по центру */
+            .center-portrait {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 220px;
+                height: 220px;
+                margin: 0;
             }
 
             /* Верхний ряд кнопок (Страна, Сфера) */
             .left-panel {
-                position: static;
-                transform: none;
-                flex-direction: row;
+                position: absolute;
+                top: 10px;
+                left: 0;
                 width: 100%;
+                flex-direction: row;
                 justify-content: center;
                 gap: 10px;
-                margin-bottom: 5px;
-                order: 1;
+                transform: none;
             }
 
             /* Нижний ряд кнопок (Проект, Контакт) */
             .right-panel {
-                position: static;
-                transform: none;
-                flex-direction: row;
+                position: absolute;
+                bottom: 50px; /* Чуть выше края */
+                left: 0;
                 width: 100%;
+                flex-direction: row;
                 justify-content: center;
                 gap: 10px;
-                margin-top: 5px;
-                order: 4;
+                transform: none;
             }
 
             .data-block {
                 flex: 1;
-                max-width: 150px;
+                max-width: 160px;
+                padding: 6px 8px;
             }
             .data-block span { font-size: 11px; }
 
-            .center-portrait {
-                width: 200px;
-                height: 200px;
-                margin: 10px 0;
-                order: 2;
-                position: absolute; /* Центрируем абсолютно */
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
+            /* Кнопка "Контент" */
             .content-btn-container {
                 position: absolute;
-                bottom: 80px; /* Отступ от нижних кнопок */
+                bottom: 120px; /* Между портретом и нижними кнопками */
                 left: 50%;
                 transform: translateX(-50%);
-                order: 3;
             }
-            
             .content-btn { padding: 8px 20px; font-size: 12px; }
 
+            /* Скрываем титулы, чтобы не перекрывали фон (или оставляем, но аккуратно) */
             .bottom-panel {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                padding-bottom: 10px;
-                z-index: 10;
+                display: none; /* Временно скрываем, чтобы не мешали */
             }
-            
-            .titles-grid { display: none; } /* Скрываем титулы, чтобы не мешали */
         }
     </style>
 </head>
 <body>
 
-    <!-- Верхний свиток -->
+    <!-- Свитки -->
     <div class="scroll-panel scroll-top" id="scroll-comrades">
         <div class="scroll-header">
             <div class="scroll-title">Звезды (Соратники)</div>
@@ -296,7 +281,6 @@
         <div id="comrades-list"></div>
     </div>
 
-    <!-- Нижний свиток -->
     <div class="scroll-panel scroll-bottom" id="scroll-content">
         <div class="scroll-header">
             <div class="scroll-title">Контент (Лента)</div>
@@ -309,7 +293,6 @@
         </div>
     </div>
 
-    <!-- Главный контейнер -->
     <div class="cockpit" id="profile-container"></div>
 
     <script>
@@ -339,17 +322,13 @@
         `).join('');
 
         container.innerHTML = `
-            <!-- Верхняя навигация -->
             <div class="top-nav">
                 <button class="ui-btn" onclick="window.location.href='bigdata.html'">BIG DATA</button>
                 <button class="ui-btn active" onclick="toggleScroll('scroll-comrades')">ЗВЕЗДЫ</button>
                 <button class="ui-btn" onclick="window.location.href='comrade-profile.html'">ПУЛЬТ</button>
             </div>
 
-            <!-- Основная зона -->
             <div class="main-zone">
-                
-                <!-- Левая панель (Страна, Сфера) -->
                 <div class="left-panel">
                     <div class="data-block">
                         <strong>Страна</strong>
@@ -361,17 +340,14 @@
                     </div>
                 </div>
 
-                <!-- Центральный портрет -->
                 <div class="center-portrait">
                     <img src="${data.image}" alt="Портрет" onerror="this.src='https://yuriytiora.github.io/unitwelve/be3.webp'">
                 </div>
 
-                <!-- Кнопка "Контент" -->
                 <div class="content-btn-container">
                     <button class="ui-btn" onclick="toggleScroll('scroll-content')">КОНТЕНТ</button>
                 </div>
 
-                <!-- Правая панель (Проект, Контакт) -->
                 <div class="right-panel">
                     <div class="data-block">
                         <strong>Проект</strong>
@@ -384,7 +360,6 @@
                 </div>
             </div>
 
-            <!-- Нижняя панель (Титулы) -->
             <div class="bottom-panel">
                 <div class="titles-grid">${titlesHTML}</div>
                 <a href="comrades.html" style="color:#64748b; font-size:11px; text-decoration:none; margin-top:10px; display:inline-block;">← Вернуться к Соратникам</a>
