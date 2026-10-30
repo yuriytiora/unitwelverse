@@ -7,14 +7,14 @@
     <style>
         :root { 
             --bg-space: #05060f; 
-            /* Меняем цвет на глубокий синий, как в фоне */
-            --neon-glow: #4a90e2; 
-            /* Цвет для активных элементов (сохраняем узнаваемость, но делаем мягче) */
-            --text-glow: #6ab0f0; 
+            /* Приглушили цвет окантовки (было #4a90e2) */
+            --neon-glow: #2b5a8c; 
+            /* Приглушили цвет текста (было #6ab0f0) */
+            --text-glow: #4a90e2; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            /* Панели делаем с легким синим оттенком */
-            --panel-bg: rgba(15, 35, 60, 0.4); 
+            /* Панели сделали чуть темнее */
+            --panel-bg: rgba(10, 25, 45, 0.5); 
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
@@ -74,12 +74,12 @@
             text-align: center;
             font-weight: normal; 
         }
-        .ui-btn:hover { background: rgba(74, 144, 226, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
+        .ui-btn:hover { background: rgba(43, 90, 140, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         
         .ui-btn.active { 
             background: rgba(0,0,0,0.3); 
             color: var(--text-glow); 
-            box-shadow: 0 0 10px rgba(74, 144, 226, 0.3); 
+            box-shadow: 0 0 10px rgba(43, 90, 140, 0.3); 
         }
 
         /* Основная зона */
@@ -116,21 +116,19 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .data-block:hover { background: rgba(74, 144, 226, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
+        .data-block:hover { background: rgba(43, 90, 140, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         .data-block strong { display: block; font-size: 10px; color: var(--text-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; font-weight: normal; }
         .data-block span { display: none; }
 
-        /* Портрет (ИЗМЕНЕНО НА КВАДРАТ) */
+        /* Портрет (Квадрат со скругленными углами) */
         .center-portrait {
             position: relative;
             z-index: 5;
             width: 300px; 
             height: 300px; 
-            /* Закругляем углы, чтобы вписать в восьмиугольник фона */
             border-radius: 30px; 
-            border: 2px solid var(--neon-glow);
-            /* Уменьшаем яркость и размах свечения */
-            box-shadow: 0 0 30px rgba(74, 144, 226, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
+            border: 2px solid var(--neon-glow); /* Использует приглушенный цвет */
+            box-shadow: 0 0 30px rgba(43, 90, 140, 0.3), inset 0 0 20px rgba(0,0,0,0.8); /* Свечение тоже приглушено */
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -198,7 +196,7 @@
         .close-btn { background: transparent; border: 1px solid var(--neon-glow); color: var(--neon-glow); padding: 5px 10px; border-radius: 5px; cursor: pointer; }
         
         .comrade-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.2s; }
-        .comrade-item:hover { background: rgba(74, 144, 226, 0.1); }
+        .comrade-item:hover { background: rgba(43, 90, 140, 0.1); }
         .comrade-avatar { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--neon-glow); background: #000; object-fit: cover; }
         .comrade-info { display: flex; flex-direction: column; }
         .comrade-name { font-size: 14px; font-weight: normal; }
@@ -226,7 +224,7 @@
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 50px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 0 50px rgba(43, 90, 140, 0.3);
         }
         .info-modal.open {
             opacity: 1;
@@ -241,7 +239,8 @@
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
             body {
-                background-image: url('cockpit4.webp'); /* Убедитесь, что фон переименован правильно */
+                /* Убедитесь, что имя файла совпадает с тем, что на GitHub (cockpit4.webp или cockpit3.webp) */
+                background-image: url('cockpit4.webp'); 
                 background-size: cover;
                 background-position: center;
             }
@@ -274,7 +273,7 @@
                 transform: translate(-50%, -50%);
                 width: 180px; 
                 height: 180px; 
-                border-radius: 20px; /* Квадрат со скругленными углами для мобилок */
+                border-radius: 20px; 
                 margin: 0; 
                 z-index: 10;
             }
