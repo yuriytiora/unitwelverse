@@ -7,14 +7,12 @@
     <style>
         :root { 
             --bg-space: #05060f; 
-            /* Приглушили цвет окантовки (было #4a90e2) */
             --neon-glow: #2b5a8c; 
-            /* Приглушили цвет текста (было #6ab0f0) */
             --text-glow: #4a90e2; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            /* Панели сделали чуть темнее */
-            --panel-bg: rgba(10, 25, 45, 0.5); 
+            /* Унифицированный фон для всех панелей */
+            --panel-bg: rgba(0, 0, 0, 0.3); 
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
         * { box-sizing: border-box; }
@@ -58,29 +56,57 @@
             width: 100%;
         }
         
-        /* Единый стиль для всех кнопок */
-        .ui-btn {
-            background: rgba(0,0,0,0.3); 
+        /* Единый стиль для ВСЕХ кнопок (и верхних, и нижних) */
+        .ui-btn, .data-block {
+            background: var(--panel-bg);
             border: 1px solid var(--neon-glow);
             color: var(--neon-glow);
-            padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            font-weight: normal;
+            box-shadow: 0 0 5px rgba(43, 90, 140, 0.1); /* Легкая тень для всех */
+        }
+
+        /* Специфика верхних кнопок */
+        .ui-btn {
+            padding: 8px 15px;
             text-transform: uppercase;
             font-size: 11px;
             letter-spacing: 1px;
-            transition: 0.3s;
             min-width: 100px;
-            text-align: center;
-            font-weight: normal; 
         }
-        .ui-btn:hover { background: rgba(43, 90, 140, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
         
+        /* Специфика нижних кнопок */
+        .data-block {
+            padding: 8px 10px;
+        }
+
+        /* Эффекты наведения (одинаковые для всех) */
+        .ui-btn:hover, .data-block:hover { 
+            background: rgba(43, 90, 140, 0.2); 
+            box-shadow: 0 0 15px var(--neon-glow); 
+        }
+        
+        /* Активная кнопка (Звезды) */
         .ui-btn.active { 
-            background: rgba(0,0,0,0.3); 
+            background: var(--panel-bg); 
             color: var(--text-glow); 
             box-shadow: 0 0 10px rgba(43, 90, 140, 0.3); 
         }
+
+        /* Текст внутри кнопок */
+        .data-block strong { 
+            display: block; 
+            font-size: 10px; 
+            color: var(--text-glow); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 0; 
+            font-weight: normal; 
+        }
+        .data-block span { display: none; }
 
         /* Основная зона */
         .main-zone {
@@ -107,28 +133,15 @@
         .left-panel { left: 20px; }
         .right-panel { right: 20px; }
 
-        .data-block {
-            background: var(--panel-bg);
-            border: 1px solid var(--neon-glow);
-            border-radius: 20px;
-            padding: 8px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .data-block:hover { background: rgba(43, 90, 140, 0.2); box-shadow: 0 0 15px var(--neon-glow); }
-        .data-block strong { display: block; font-size: 10px; color: var(--text-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; font-weight: normal; }
-        .data-block span { display: none; }
-
-        /* Портрет (Квадрат со скругленными углами) */
+        /* Портрет */
         .center-portrait {
             position: relative;
             z-index: 5;
             width: 300px; 
             height: 300px; 
             border-radius: 30px; 
-            border: 2px solid var(--neon-glow); /* Использует приглушенный цвет */
-            box-shadow: 0 0 30px rgba(43, 90, 140, 0.3), inset 0 0 20px rgba(0,0,0,0.8); /* Свечение тоже приглушено */
+            border: 2px solid var(--neon-glow);
+            box-shadow: 0 0 30px rgba(43, 90, 140, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -239,7 +252,6 @@
         /* --- АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
         @media (max-width: 1024px) {
             body {
-                /* Убедитесь, что имя файла совпадает с тем, что на GitHub (cockpit4.webp или cockpit3.webp) */
                 background-image: url('cockpit4.webp'); 
                 background-size: cover;
                 background-position: center;
