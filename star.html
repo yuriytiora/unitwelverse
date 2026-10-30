@@ -7,11 +7,13 @@
     <style>
         :root { 
             --bg-space: #05060f; 
+            /* Цвет рамок для ВСЕХ кнопок */
             --neon-glow: #2b5a8c; 
+            /* Цвет текста */
             --text-glow: #4a90e2; 
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            /* Унифицированный фон для всех панелей */
+            /* ЕДИНЫЙ ФОН ДЛЯ ВСЕХ КНОПОК */
             --panel-bg: rgba(0, 0, 0, 0.3); 
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
@@ -56,47 +58,49 @@
             width: 100%;
         }
         
-        /* Единый стиль для ВСЕХ кнопок (и верхних, и нижних) */
+        /* ЕДИНЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК */
         .ui-btn, .data-block {
             background: var(--panel-bg);
             border: 1px solid var(--neon-glow);
-            color: var(--neon-glow);
+            color: var(--text-glow);
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
             font-weight: normal;
-            box-shadow: 0 0 5px rgba(43, 90, 140, 0.1); /* Легкая тень для всех */
+            /* Одинаковая, очень легкая тень */
+            box-shadow: 0 0 5px rgba(43, 90, 140, 0.1);
+            text-transform: uppercase;
         }
 
-        /* Специфика верхних кнопок */
+        /* Размеры и отступы */
         .ui-btn {
             padding: 8px 15px;
-            text-transform: uppercase;
             font-size: 11px;
             letter-spacing: 1px;
             min-width: 100px;
         }
         
-        /* Специфика нижних кнопок */
         .data-block {
             padding: 8px 10px;
+            font-size: 10px;
+            letter-spacing: 1px;
         }
 
-        /* Эффекты наведения (одинаковые для всех) */
+        /* Эффекты наведения (одинаковые) */
         .ui-btn:hover, .data-block:hover { 
             background: rgba(43, 90, 140, 0.2); 
             box-shadow: 0 0 15px var(--neon-glow); 
         }
         
-        /* Активная кнопка (Звезды) */
+        /* Активная кнопка (Звезды) - без заливки, только легкая тень */
         .ui-btn.active { 
             background: var(--panel-bg); 
             color: var(--text-glow); 
             box-shadow: 0 0 10px rgba(43, 90, 140, 0.3); 
         }
 
-        /* Текст внутри кнопок */
+        /* Внутренний текст (для нижних кнопок) */
         .data-block strong { 
             display: block; 
             font-size: 10px; 
