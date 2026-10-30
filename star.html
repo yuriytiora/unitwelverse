@@ -7,13 +7,10 @@
     <style>
         :root { 
             --bg-space: #05060f; 
-            /* Цвет рамок для ВСЕХ кнопок */
-            --neon-glow: #2b5a8c; 
-            /* Цвет текста */
-            --text-glow: #4a90e2; 
+            --neon-glow: #2b5a8c; /* Цвет рамок (остался прежним) */
+            --text-glow: #3a6b9e; /* Текст внутри кнопок сделали на 20% тусклее (было #4a90e2) */
             --text-main: #ffffff; 
             --accent-gold: #ffd700; 
-            /* ЕДИНЫЙ ФОН ДЛЯ ВСЕХ КНОПОК */
             --panel-bg: rgba(0, 0, 0, 0.3); 
             --glass-bg: rgba(5, 10, 20, 0.9);
         }
@@ -62,13 +59,12 @@
         .ui-btn, .data-block {
             background: var(--panel-bg);
             border: 1px solid var(--neon-glow);
-            color: var(--text-glow);
+            color: var(--text-glow); /* Использует приглушенный цвет */
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
             font-weight: normal;
-            /* Одинаковая, очень легкая тень */
             box-shadow: 0 0 5px rgba(43, 90, 140, 0.1);
             text-transform: uppercase;
         }
@@ -87,13 +83,13 @@
             letter-spacing: 1px;
         }
 
-        /* Эффекты наведения (одинаковые) */
+        /* Эффекты наведения */
         .ui-btn:hover, .data-block:hover { 
             background: rgba(43, 90, 140, 0.2); 
             box-shadow: 0 0 15px var(--neon-glow); 
         }
         
-        /* Активная кнопка (Звезды) - без заливки, только легкая тень */
+        /* Активная кнопка (Звезды) */
         .ui-btn.active { 
             background: var(--panel-bg); 
             color: var(--text-glow); 
@@ -104,7 +100,7 @@
         .data-block strong { 
             display: block; 
             font-size: 10px; 
-            color: var(--text-glow); 
+            color: var(--text-glow); /* Приглушенный цвет */
             text-transform: uppercase; 
             letter-spacing: 1px; 
             margin-bottom: 0; 
